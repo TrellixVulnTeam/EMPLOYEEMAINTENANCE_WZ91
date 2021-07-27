@@ -1,1 +1,28 @@
-<p>ver-borrar works!</p>
+
+<table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID#</th>
+        <th>Edifcio #</th>
+        <th>Direccion Edificio</th>
+        <th>Tipo</th>
+        <th>Nivel de Calidad</th>
+        <th>Categoria</th>
+        <th>Opciones</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let edificio of edificios">
+            <td>{{edificio.edificiosId}}</td>
+            <td>{{edificio.edificioNum}}</td>
+            <td>{{edificio.edificioDireccion}}</td>
+            <td>{{edificio.tipoEdif}}</td>
+            <td>{{edificio.nivelCal}}</td>
+            <td>{{edificio.categor}}</td>
+            <td>
+                <button class="btn btn-warning mx-2">Edit</button>
+                <button class="btn btn-danger mx-2">Delete</button>
+            </td>
+        </tr>
+    </tbody>
+  </table>
