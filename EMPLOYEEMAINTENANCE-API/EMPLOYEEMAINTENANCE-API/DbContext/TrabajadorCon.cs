@@ -10,7 +10,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
     public class TrabajadorCon
     {
 
-        string ConnectionString = "Server=DTIC-16\\SQLSERVERX;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
+        string ConnectionString = "Server=.;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
 
         public IEnumerable<Trabajador> Lists()
         {
