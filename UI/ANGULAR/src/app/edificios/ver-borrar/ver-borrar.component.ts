@@ -9,6 +9,9 @@ import { ManagmentService } from 'src/app/services/managment.service';
 export class VerBorrarComponent implements OnInit {
 
   edificios: any = [];
+  edificio: any;
+  tituloModal: string = "";
+  modalActivo: boolean= false;
 
   constructor(private managementService: ManagmentService) { }
 
@@ -18,9 +21,29 @@ export class VerBorrarComponent implements OnInit {
 
   asignarDatosEdificios(){
       this.managementService.obtenerEdificios()
-          .subscribe(edificios =>{
-            console.log(edificios)
-             this.edificios = edificios
-          })
+          .subscribe(edificios => this.edificios = edificios)
+  }
+
+  abrirModalAgregar(){
+    this.edificio = {
+      edificiosId : 0,
+      edificioNum : "",
+      edificioDireccion : "",
+      tipoEdif: "",
+      nivelCal: 0,
+      categor: 0
+    }
+    this.tituloModal = "Agregar Edificio";
+    this.modalActivo= true;
+  }
+  cerrarModalAgregar(){
+    this.modalActivo = false;
+    this.asignarDatosEdificios();
+  }
+
+  abrirModalEditar(edificio: any){
+    this.edificio= edificio;
+    this.tituloModal = "Editar Edificio"
+    this.modalActivo = true;
   }
 }
