@@ -10,7 +10,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
     public class TrabajadorCon
     {
 
-        string ConnectionString = "Server=DTIC-21\\MSSQLSERVERLF;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
+        string ConnectionString = "Server=DTIC-16\\SQLSERVERX;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
 
         public IEnumerable<Trabajador> Lists()
         {
@@ -24,13 +24,15 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    Trabajador trb = new Trabajador();
-                    trb.Trabajadorid = Convert.ToInt32(dr["ID"]);
-                    trb.TrabajadorNum = dr["TrabajadorNum"].ToString();
-                    trb.TrabajadorNomb = dr["TrabajadorNomb"].ToString();
-                    trb.TrabajadorTarif = dr["TrabajadorTarif"].ToString();
-                    trb.Oficio = dr["Oficio"].ToString();
-                    trb.TrabajadorSuper = dr["TrabajadorSuper"].ToString();
+                    Trabajador trb = new Trabajador
+                    {
+                        Trabajadorid = Convert.ToInt32(dr["ID"]),
+                        TrabajadorNum = dr["TrabajadorNum"].ToString(),
+                        TrabajadorNomb = dr["TrabajadorNomb"].ToString(),
+                        TrabajadorTarif = dr["TrabajadorTarif"].ToString(),
+                        Oficio = dr["Oficio"].ToString(),
+                        TrabajadorSuper = dr["TrabajadorSuper"].ToString()
+                    };
 
                     listTrabajadores.Add(trb);
 
