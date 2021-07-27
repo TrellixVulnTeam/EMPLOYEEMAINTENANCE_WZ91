@@ -29,6 +29,9 @@ namespace EMPLOYEEMAINTENANCE_API
         {
             
             services.AddControllers();
+
+            services.AddTransient<IAsignacionesCon, AsignacionesCon>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EMPLOYEEMAINTENANCE_API", Version = "v1" });
