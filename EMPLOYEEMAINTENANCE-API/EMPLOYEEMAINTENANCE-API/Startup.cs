@@ -34,6 +34,7 @@ namespace EMPLOYEEMAINTENANCE_API
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EMPLOYEEMAINTENANCE_API", Version = "v1" });
             });
             services.AddOptions();
+            services.AddCors();
 
          
 
@@ -42,6 +43,7 @@ namespace EMPLOYEEMAINTENANCE_API
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options => options.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin());
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
