@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,14 +10,22 @@ namespace EMPLOYEEMAINTENANCE_API.Models
 {
     public class TrabajadorCon
     {
+        public IConfiguration Configuration { get; }
+        public TrabajadorCon(IConfiguration configuration)
+        {
+            Configuration = configuration;
+        }
 
-        string ConnectionString = "Server=DTIC-21\\MSSQLSERVERLF;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
+       
 
+
+       
         public IEnumerable<Trabajador> Lists()
         {
+            
             List<Trabajador> listTrabajadores = new List<Trabajador>();
 
-            using (SqlConnection con = new SqlConnection(ConnectionString))
+            using (SqlConnection con = new SqlConnection(Configuration.GetConnectionString("Conn")))
             {
                 SqlCommand cmd = new SqlCommand("ListadoTrabajador", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -46,7 +55,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
         {
             Trabajador trb = new Trabajador();
 
-            using (SqlConnection con = new SqlConnection(ConnectionString))
+            using (SqlConnection con = new SqlConnection(Configuration.GetConnectionString("Conn")))
             {
                 SqlCommand cmd = new SqlCommand("trabajadorPorId", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -73,7 +82,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
 
         public void Añadir(Trabajador model)
         {
-            using (SqlConnection con = new SqlConnection(ConnectionString))
+            using (SqlConnection con = new SqlConnection(Configuration.GetConnectionString("Conn")))
 
             {
                 SqlCommand cmd = new SqlCommand("insertarTrabajador", con);
@@ -94,7 +103,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
 
         public void Borrar(int? id)
         {
-            using (SqlConnection con = new SqlConnection(ConnectionString))
+            using (SqlConnection con = new SqlConnection(Configuration.GetConnectionString("Conn")))
 
             {
                 SqlCommand cmd = new SqlCommand("borrarTrabajador", con);
@@ -114,7 +123,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
         public void Actualizar(Trabajador model, int id)
         {
             model.Trabajadorid = id;
-            using (SqlConnection con = new SqlConnection(ConnectionString))
+            using (SqlConnection con = new SqlConnection(Configuration.GetConnectionString("Conn")))
 
             {
                 SqlCommand cmd = new SqlCommand("actualizarTrabajador", con);
