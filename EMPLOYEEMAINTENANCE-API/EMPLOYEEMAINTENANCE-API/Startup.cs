@@ -1,3 +1,4 @@
+using EMPLOYEEMAINTENANCE_API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -32,6 +33,10 @@ namespace EMPLOYEEMAINTENANCE_API
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EMPLOYEEMAINTENANCE_API", Version = "v1" });
             });
+            services.AddOptions();
+
+         
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -1,5 +1,6 @@
 ﻿using EMPLOYEEMAINTENANCE_API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,14 +13,15 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
     [ApiController]
     public class TrabajadorController : ControllerBase
     {
+
         TrabajadorCon trabajadorCon = new TrabajadorCon();
         // GET: api/<TrabajadorController>
         [HttpGet]
         public IEnumerable<Trabajador> Get()
         {
-            
 
-            return  trabajadorCon.Lists();
+
+            return trabajadorCon.Lists();
 
         }
 
@@ -40,13 +42,13 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         [HttpPost]
         public ActionResult Post([FromBody] Trabajador model)
         {
-            if(model != null)
+            if (model != null)
             {
 
                 trabajadorCon.Añadir(model);
             }
 
-            return CreatedAtAction("Getid", new { id = model.Trabajadorid}, model);
+            return CreatedAtAction("Getid", new { id = model.Trabajadorid }, model);
 
 
         }
@@ -71,7 +73,7 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-           
+
             var trabajador = trabajadorCon.BuscarPorID(id);
             if (trabajador == null)
             {
@@ -79,7 +81,7 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
                 return NotFound();
             }
 
-          
+
             trabajadorCon.Borrar(id);
             return NoContent();
 

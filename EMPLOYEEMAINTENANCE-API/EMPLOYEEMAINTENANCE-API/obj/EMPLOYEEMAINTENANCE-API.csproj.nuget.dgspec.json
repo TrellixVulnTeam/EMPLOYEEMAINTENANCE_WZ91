@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\l.franco\\source\\repos\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj": {}
+    "C:\\Users\\l.franco\\Documents\\GitHub\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj": {}
   },
   "projects": {
-    "C:\\Users\\l.franco\\source\\repos\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj": {
+    "C:\\Users\\l.franco\\Documents\\GitHub\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\l.franco\\source\\repos\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj",
+        "projectUniqueName": "C:\\Users\\l.franco\\Documents\\GitHub\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj",
         "projectName": "EMPLOYEEMAINTENANCE-API",
-        "projectPath": "C:\\Users\\l.franco\\source\\repos\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj",
+        "projectPath": "C:\\Users\\l.franco\\Documents\\GitHub\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj",
         "packagesPath": "C:\\Users\\l.franco\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\l.franco\\source\\repos\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\obj\\",
+        "outputPath": "C:\\Users\\l.franco\\Documents\\GitHub\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
