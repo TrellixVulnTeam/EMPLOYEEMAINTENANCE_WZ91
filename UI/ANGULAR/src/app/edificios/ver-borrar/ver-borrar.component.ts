@@ -12,6 +12,8 @@ export class VerBorrarComponent implements OnInit {
   edificio: any;
   tituloModal: string = "";
   modalActivo: boolean= false;
+  verDetalleEdificio: boolean = true;
+  detalleEdificio: any = [];
 
   constructor(private managementService: ManagmentService) { }
 
@@ -22,6 +24,16 @@ export class VerBorrarComponent implements OnInit {
   asignarDatosEdificios(){
       this.managementService.obtenerEdificios()
           .subscribe(edificios => this.edificios = edificios)
+  }
+
+  verEdificio(id: any){
+    this.managementService.verEdificio(id)
+        .subscribe( edificio => {
+          this.detalleEdificio.push(edificio)
+        })
+    this.verDetalleEdificio = true;
+    this.detalleEdificio=[];
+    this.tituloModal ="Detalles de Edificio"
   }
 
   abrirModalAgregar(){
@@ -36,14 +48,26 @@ export class VerBorrarComponent implements OnInit {
     this.tituloModal = "Agregar Edificio";
     this.modalActivo= true;
   }
+
   cerrarModalAgregar(){
     this.modalActivo = false;
     this.asignarDatosEdificios();
+    this.verDetalleEdificio = false;
   }
 
   abrirModalEditar(edificio: any){
     this.edificio= edificio;
     this.tituloModal = "Editar Edificio"
     this.modalActivo = true;
+  }
+
+  eliminarEdificio(id: any){
+      if(confirm("Are you sure you want to delete this record ?")){
+        this.managementService.eliminarEdificio(id)
+            .subscribe( res => console.log("Edificio elmininado"))
+        setTimeout(() => {
+          this.asignarDatosEdificios();
+        }, 500); 
+      }
   }
 }

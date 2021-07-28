@@ -17,7 +17,6 @@ export class EditarAgregarComponent implements OnInit {
  nivelCal: string = "";
  categor: string = "";
 
- feedbackAlert: boolean = false;
 
   constructor(private managmentService: ManagmentService) { }
 
@@ -47,6 +46,19 @@ export class EditarAgregarComponent implements OnInit {
   }
 
   actualizarEdificio(){
+    var edificio = {
+      edificiosId : this.edificiosId,
+      edificioNum : this.edificioNum,
+      edificioDireccion : this.edificioDireccion,
+      tipoEdif : this.tipoEdif,
+      nivelCal : this.nivelCal,
+      categor : this.categor
+    }
+
+    this.managmentService.actualizarEdificio(edificio)
+        .subscribe( res => {
+          console.log(res)
+        })
   }
 
 }
