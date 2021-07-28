@@ -17,7 +17,6 @@ export class EditarAgregarComponent implements OnInit {
  nivelCal: string = "";
  categor: string = "";
 
- feedbackAlert: boolean = false;
 
   constructor(private managmentService: ManagmentService) { }
 

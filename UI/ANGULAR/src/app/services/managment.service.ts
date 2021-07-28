@@ -22,6 +22,10 @@ export class ManagmentService {
   }
 
   eliminarEdificio(id: any){
-    return this.http.delete(`${this.BaseApiUrl}/Edificios/`+ id);
+    return this.http.delete(`${this.BaseApiUrl}/Edificios/${id}`);
+  }
+
+  verEdificio(id: any){
+      return this.http.get(`${this.BaseApiUrl}/Edificios/${id}`)
   }
 }
