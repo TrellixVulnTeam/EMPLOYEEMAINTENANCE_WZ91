@@ -12,26 +12,29 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     public class EdificiosController : ControllerBase
-
     {
-        EdificiosCon EdificiosCon = new();
+        IEdificiosCon _edificiosCon;
+        public EdificiosController(IEdificiosCon edificiosCon)
+        {
+            _edificiosCon = edificiosCon;
+        }
         // GET: api/<EdificiosController>
         [HttpGet]
         public IEnumerable<Edificios> Get()
         {
-            return EdificiosCon.Lists();
+            return _edificiosCon.Lists();
         }
 
         // GET api/<EdificiosController>/5
         [HttpGet("{id}")]
-        public ActionResult <Edificios> Getid(int id)
+        public ActionResult <Edificios> GetId(int id)
         {
-            var edificios = EdificiosCon.BuscarPorID(id);
+            var edificios = _edificiosCon.BuscarPorID(id);
             if (edificios == null)
             {
                 return NotFound();
             }
-            return EdificiosCon.BuscarPorID(id);
+            return _edificiosCon.BuscarPorID(id);
         }
 
         // POST api/<EdificiosController>
@@ -41,10 +44,10 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
 
             if (model !=null)
             {
-                EdificiosCon.Añadir(model);
+                _edificiosCon.Añadir(model);
             }
 
-            return CreatedAtAction("Getid", new { id = model.EdificiosId }, model);
+            return CreatedAtAction("GetId", new { id = model.EdificiosId }, model);
         }
 
         // PUT api/<EdificiosController>/5
@@ -55,9 +58,9 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
             {
                 return BadRequest();
             }
-            if (model == null)
+            if (model != null)
             {
-                EdificiosCon.Actualizar(model, id);
+                _edificiosCon.Actualizar(model, id);
             }
             return NoContent();
         }
@@ -66,12 +69,12 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
-            var edificios = EdificiosCon.BuscarPorID(id);
+            var edificios = _edificiosCon.BuscarPorID(id);
             if (edificios == null)
             {
                 return NotFound();
             }
-            EdificiosCon.Borrar(id);
+            _edificiosCon.Borrar(id);
             return NoContent();
         }
     }

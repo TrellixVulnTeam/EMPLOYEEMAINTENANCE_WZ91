@@ -13,29 +13,32 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
     [ApiController]
     public class TrabajadorController : ControllerBase
     {
-
-        TrabajadorCon trabajadorCon = new TrabajadorCon();
+        ITrabajadorCon _trabajadorCon;
+        public TrabajadorController(ITrabajadorCon trabajadorCon)
+        {
+            _trabajadorCon = trabajadorCon;
+        }
         // GET: api/<TrabajadorController>
         [HttpGet]
         public IEnumerable<Trabajador> Get()
         {
 
 
-            return trabajadorCon.Lists();
+            return _trabajadorCon.Lists();
 
         }
 
         // GET api/<TrabajadorController>/5
         [HttpGet("{id}")]
-        public ActionResult<Trabajador> Getid(int id)
+        public ActionResult<Trabajador> GetId(int id)
         {
-            var trabajador = trabajadorCon.BuscarPorID(id);
+            var trabajador = _trabajadorCon.BuscarPorID(id);
             if (trabajador == null)
             {
 
                 return NotFound();
             }
-            return trabajadorCon.BuscarPorID(id);
+            return _trabajadorCon.BuscarPorID(id);
         }
 
         // POST api/<TrabajadorController>
@@ -45,10 +48,10 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
             if (model != null)
             {
 
-                trabajadorCon.Añadir(model);
+                _trabajadorCon.Añadir(model);
             }
 
-            return CreatedAtAction("Getid", new { id = model.Trabajadorid }, model);
+            return CreatedAtAction("GetId", new { id = model.Trabajadorid }, model);
 
 
         }
@@ -61,9 +64,9 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
             {
                 return BadRequest();
             }
-            if (model == null)
+            if (model != null)
             {
-                trabajadorCon.Actualizar(model, id);
+                _trabajadorCon.Actualizar(model, id);
 
             }
             return NoContent();
@@ -74,7 +77,7 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         public ActionResult Delete(int id)
         {
 
-            var trabajador = trabajadorCon.BuscarPorID(id);
+            var trabajador = _trabajadorCon.BuscarPorID(id);
             if (trabajador == null)
             {
 
@@ -82,7 +85,7 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
             }
 
 
-            trabajadorCon.Borrar(id);
+            _trabajadorCon.Borrar(id);
             return NoContent();
 
         }

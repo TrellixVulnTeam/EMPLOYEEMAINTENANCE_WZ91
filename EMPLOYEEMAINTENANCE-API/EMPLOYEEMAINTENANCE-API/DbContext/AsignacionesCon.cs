@@ -11,7 +11,6 @@ namespace EMPLOYEEMAINTENANCE_API.Models
 {
     public class AsignacionesCon: IAsignacionesCon
     {
-
         IConfiguration _configuration;
         public AsignacionesCon(IConfiguration  configuration)
         {
@@ -67,8 +66,8 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                         asg.AsigNum = dr["AsigNum"].ToString();
                         asg.AsigFechIni = dr["AsigFechIni"].ToString();
                         asg.AsigNumDias = dr["AsigNumDias"].ToString();
-                        asg.EdificioNum_fk = Convert.ToInt32(dr["ID"]);
-                        asg.TrabajadorNum_fk = Convert.ToInt32(dr["ID"]);
+                        asg.EdificioNum_fk = Convert.ToInt32(dr["EdificioNum_fk"]);
+                        asg.TrabajadorNum_fk = Convert.ToInt32(dr["TrabajadorNum_fk"]);
 
                     };
                     con.Close();
@@ -123,8 +122,8 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                     cmd.Parameters.AddWithValue("@AsigNum", model.AsigNum);
                     cmd.Parameters.AddWithValue("@AsigFechIni", model.AsigFechIni);
                     cmd.Parameters.AddWithValue("@AsigNumDias", model.AsigNumDias);
-                    cmd.Parameters.AddWithValue("@ID", model.EdificioNum_fk);
-                    cmd.Parameters.AddWithValue("@ID", model.TrabajadorNum_fk);
+                    cmd.Parameters.AddWithValue("@EdificioNum_fk", model.EdificioNum_fk);
+                    cmd.Parameters.AddWithValue("@TrabajadorNum_fk", model.TrabajadorNum_fk);
 
                     con.Open();
                     cmd.ExecuteNonQuery();

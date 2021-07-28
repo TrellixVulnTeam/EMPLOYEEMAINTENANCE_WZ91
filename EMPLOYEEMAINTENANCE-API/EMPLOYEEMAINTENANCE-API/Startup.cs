@@ -31,6 +31,9 @@ namespace EMPLOYEEMAINTENANCE_API
             services.AddControllers();
 
             services.AddTransient<IAsignacionesCon, AsignacionesCon>();
+            services.AddTransient<ITrabajadorCon, TrabajadorCon>();
+            services.AddTransient<IEdificiosCon, EdificiosCon>();
+
 
             services.AddSwaggerGen(c =>
             {

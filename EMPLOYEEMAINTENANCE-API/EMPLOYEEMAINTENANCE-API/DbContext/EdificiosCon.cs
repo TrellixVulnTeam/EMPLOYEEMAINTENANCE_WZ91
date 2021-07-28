@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Configuration;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -7,16 +8,22 @@ using System.Threading.Tasks;
 
 namespace EMPLOYEEMAINTENANCE_API.Models
 {
-    public class EdificiosCon
+    public class EdificiosCon: IEdificiosCon
+
     {
-        string ConnectionString = "Server=.;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
+        IConfiguration _configuration;
+        public EdificiosCon(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
+        //string ConnectionString = "Server=.;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
 
         //Get list Edificios
         public IEnumerable<Edificios> Lists()
         {
             List<Edificios> listEdificios = new List<Edificios>();
 
-            using (SqlConnection con = new SqlConnection(ConnectionString))
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
             {
                 SqlCommand cmd = new SqlCommand("ListadoEdificios", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -35,7 +42,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                     };
                     listEdificios.Add(edif);
                 }
-                con.Close();   
+                con.Close();
             }
             return listEdificios;
         }
@@ -45,15 +52,15 @@ namespace EMPLOYEEMAINTENANCE_API.Models
         {
             Edificios edif = new Edificios();
 
-            using (SqlConnection con = new SqlConnection(ConnectionString))
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
             {
-                SqlCommand cmd = new ("edificioPorId", con);
+                SqlCommand cmd = new("edificioPorId", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", id);
                 con.Open();
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
-                {                    
+                {
                     edif.EdificiosId = Convert.ToInt32(dr["ID"]);
                     edif.EdificioNum = dr["EdificioNum"].ToString();
                     edif.EdificioDireccion = dr["EdificioDireccion"].ToString();
@@ -69,7 +76,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
         //Create Edificios
         public void Añadir(Edificios model)
         {
-            using (SqlConnection con = new SqlConnection(ConnectionString))
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
             {
                 SqlCommand cmd = new SqlCommand("insertarEdificio", con);
@@ -90,7 +97,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
         //Remove Edificios
         public void Borrar(int? id)
         {
-            using (SqlConnection con = new SqlConnection(ConnectionString))
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
             {
                 SqlCommand cmd = new SqlCommand("borrarEdificio", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -105,7 +112,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
         public void Actualizar(Edificios model, int id)
         {
             model.EdificiosId = id;
-            using (SqlConnection con = new SqlConnection(ConnectionString))
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
             {
                 SqlCommand cmd = new SqlCommand("actualizarEdificio", con);

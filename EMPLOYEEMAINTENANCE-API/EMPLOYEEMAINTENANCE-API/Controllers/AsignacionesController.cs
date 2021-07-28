@@ -57,7 +57,7 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
             {
                 return BadRequest();
             }
-            if (model == null)
+            if (model != null)
             {
                 _asignacionesCon.Actualizar(model, id);
             }
