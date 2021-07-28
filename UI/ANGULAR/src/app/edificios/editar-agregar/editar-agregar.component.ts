@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ManagmentService } from 'src/app/services/managment.service';
 
 @Component({
   selector: 'app-editar-agregar',
@@ -16,7 +17,9 @@ export class EditarAgregarComponent implements OnInit {
  nivelCal: string = "";
  categor: string = "";
 
-  constructor() { }
+ feedbackAlert: boolean = false;
+
+  constructor(private managmentService: ManagmentService) { }
 
   ngOnInit(): void {
     this.edificiosId = this.edificio.edificiosId;
@@ -25,6 +28,25 @@ export class EditarAgregarComponent implements OnInit {
     this.tipoEdif = this.edificio.tipoEdif;
     this.nivelCal = this.edificio.nivelCal;
     this.categor = this.edificio.categor;
+  }
+
+  agregarEdificio(){
+    var edificio = {
+      edificiosId : this.edificiosId,
+      edificioNum : this.edificioNum,
+      edificioDireccion : this.edificioDireccion,
+      tipoEdif : this.tipoEdif,
+      nivelCal : this.nivelCal,
+      categor : this.categor
+    }
+
+    this.managmentService.añadirEdificio(edificio)
+        .subscribe( res => {
+          console.log(res)
+        })
+  }
+
+  actualizarEdificio(){
   }
 
 }
