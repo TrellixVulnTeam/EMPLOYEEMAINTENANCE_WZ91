@@ -14,6 +14,8 @@ export class VerBorrarComponent implements OnInit {
   modalActivo: boolean= false;
   verDetalleEdificio: boolean = true;
   detalleEdificio: any = [];
+  parametroBusqueda: string = "";
+  lastSearch: string = "";
 
   constructor(private managementService: ManagmentService) { }
 
@@ -51,7 +53,6 @@ export class VerBorrarComponent implements OnInit {
 
   cerrarModalAgregar(){
     this.modalActivo = false;
-    this.asignarDatosEdificios();
     this.verDetalleEdificio = false;
   }
 
@@ -70,4 +71,20 @@ export class VerBorrarComponent implements OnInit {
         }, 500); 
       }
   }
+
+
+
+  buscar(parametroBusqueda: any){
+    if(parametroBusqueda === this.lastSearch) return ;
+    this.lastSearch = parametroBusqueda
+    this.managementService.buscarEdificio()
+        .subscribe( edificios => {
+          console.log(parametroBusqueda)
+          console.log(edificios)
+           this.edificios = edificios.filter( (edificio:any) =>      
+           edificio.edificioDireccion.trim().toLowerCase().includes(parametroBusqueda.toLowerCase())
+          )
+        })
+  }
+
 }

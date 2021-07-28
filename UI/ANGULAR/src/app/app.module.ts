@@ -12,6 +12,7 @@ import { VerBorrarComponent } from './edificios/ver-borrar/ver-borrar.component'
 import { EditarAgregarComponent } from './edificios/editar-agregar/editar-agregar.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { BarraBuscarComponent } from './barra-buscar/barra-buscar.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AppRoutingModule } from './app-routing.module';
     AsignacionesComponent,
     VerBorrarComponent,
     EditarAgregarComponent,
+    BarraBuscarComponent,
 
   ],
   imports: [
