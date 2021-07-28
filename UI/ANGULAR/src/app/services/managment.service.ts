@@ -17,8 +17,8 @@ export class ManagmentService {
     return this.http.post(`${this.BaseApiUrl}/Edificios`, edificio)
   }
 
-  actualizarEdificio(id: any){
-    return this.http.put(`${this.BaseApiUrl}/Edificios`, id)
+  actualizarEdificio(edificio: any){
+    return this.http.put(`${this.BaseApiUrl}/Edificios/${edificio.edificiosId}`, edificio)
   }
 
   eliminarEdificio(id: any){
