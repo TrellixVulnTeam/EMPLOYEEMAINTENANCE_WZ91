@@ -55,7 +55,7 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
             {
                 return BadRequest();
             }
-            if (model == null)
+            if (model != null)
             {
                 EdificiosCon.Actualizar(model, id);
             }
