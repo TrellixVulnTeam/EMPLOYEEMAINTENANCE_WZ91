@@ -10,7 +10,7 @@
           (click)="cerrarModalAgregar()"></button>
         </div>
         <div class="modal-body">
-          <app-editar-agregar [edificio]="edificio" *ngIf="modalActivo"></app-editar-agregar>
+          <app-editar-agregar [edificio]="edificio" *ngIf="modalActivo" (evntoLista)="asignarDatosEdificios()" (eventoBuscar)="buscar(this.managementService.busqueda.trim().toLowerCase())"></app-editar-agregar>
           <ul class="list-group" *ngFor="let edificio of detalleEdificio">
             <div *ngIf="verDetalleEdificio">
                 <li class="list-group-item"><strong>ID #:</strong> {{edificio.edificiosId}}</li>
@@ -29,9 +29,14 @@
 
   <app-barra-buscar 
   (onEnter)="buscar( $event )"
-  placeholder="Buscar por direccion"></app-barra-buscar>
+  placeholder="Buscar por direccion" ></app-barra-buscar>
   
 <hr>
+
+<div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="!edificios.length">
+  <strong>Sin resultados para {{parametroBusqueda}}</strong> 
+  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
 
 <table class="table table-striped">
     <thead>
