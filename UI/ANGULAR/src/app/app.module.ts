@@ -12,6 +12,9 @@ import { VerBorrarComponent } from './edificios/ver-borrar/ver-borrar.component'
 import { EditarAgregarComponent } from './edificios/editar-agregar/editar-agregar.component';
 
 import { AppRoutingModule } from './app-routing.module';
+import { TrabajadoresService } from './services/trabajadores.service';
+import { EditarAgregarTrabajadorComponent } from './trabajadores/editar-agregar-trabajador/editar-agregar-trabajador.component';
+import { VerBorrarTrabajadorComponent } from './trabajadores/ver-borrar-trabajador/ver-borrar-trabajador.component';
 
 
 @NgModule({
@@ -22,6 +25,8 @@ import { AppRoutingModule } from './app-routing.module';
     AsignacionesComponent,
     VerBorrarComponent,
     EditarAgregarComponent,
+    EditarAgregarTrabajadorComponent,
+    VerBorrarTrabajadorComponent
 
   ],
   imports: [
@@ -31,7 +36,7 @@ import { AppRoutingModule } from './app-routing.module';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [ManagmentService],
+  providers: [ManagmentService, TrabajadoresService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
