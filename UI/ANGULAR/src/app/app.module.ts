@@ -13,11 +13,15 @@ import { VerBorrarComponent } from './edificios/ver-borrar/ver-borrar.component'
 import { EditarAgregarComponent } from './edificios/editar-agregar/editar-agregar.component';
 
 import { AppRoutingModule } from './app-routing.module';
+<<<<<<< HEAD
 import { ManagmentAsigService } from './services/managment-asig.service';
 import { AsignacionesComponent } from './asignaciones/asignaciones.component';
 import { FooterComponent } from './shared/footer/footer.component';
 import { SharedModule } from './shared/shared.module';
 
+=======
+import { BarraBuscarComponent } from './barra-buscar/barra-buscar.component';
+>>>>>>> 4e37bf3c12899539f1a6b37f1aebbf8f8d18e9ec
 
 
 @NgModule({
@@ -27,8 +31,13 @@ import { SharedModule } from './shared/shared.module';
     EdificiosComponent,
     VerBorrarComponent,
     EditarAgregarComponent,
+<<<<<<< HEAD
     AsignacionesComponent,
     FooterComponent
+=======
+    BarraBuscarComponent,
+
+>>>>>>> 4e37bf3c12899539f1a6b37f1aebbf8f8d18e9ec
   ],
   imports: [
     BrowserModule,

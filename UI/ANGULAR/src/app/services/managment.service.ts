@@ -29,4 +29,8 @@ export class ManagmentService {
   verEdificio(id: any){
       return this.http.get(`${this.BaseApiUrl}/Edificios/${id}`)
   }
+
+  buscarEdificio(){
+    return this.http.get<any>(`${this.BaseApiUrl}/Edificios`);
+  }
 }
