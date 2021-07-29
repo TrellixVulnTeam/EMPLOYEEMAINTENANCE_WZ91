@@ -9,6 +9,7 @@ export class ManagmentService {
   
   readonly BaseApiUrl = "https://localhost:44347/api"
   constructor(private http: HttpClient) { }
+  busqueda:string = ""
 
   obtenerEdificios(): Observable<any[]>{
     return this.http.get<any>(`${this.BaseApiUrl}/Edificios`);

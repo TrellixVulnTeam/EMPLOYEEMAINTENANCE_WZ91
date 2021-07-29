@@ -19,11 +19,17 @@ import { AsignacionesComponent } from './asignaciones/asignaciones.component';
 
 
 
-import { BarraBuscarComponent } from './barra-buscar/barra-buscar.component';
+
 import { EditarAgregarAsignComponent } from './asignaciones/editar-agregar-asign/editar-agregar-asign.component';
 import { VerBorrarAsignComponent } from './asignaciones/ver-borrar-asign/ver-borrar-asign.component';
 
 
+
+import { TrabajadoresService } from './services/trabajadores.service';
+import { EditarAgregarTrabajadorComponent } from './trabajadores/editar-agregar-trabajador/editar-agregar-trabajador.component';
+import { VerBorrarTrabajadorComponent } from './trabajadores/ver-borrar-trabajador/ver-borrar-trabajador.component';
+import { BarraBuscarComponent } from './barra-buscar/barra-buscar.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 @NgModule({
@@ -34,6 +40,8 @@ import { VerBorrarAsignComponent } from './asignaciones/ver-borrar-asign/ver-bor
     VerBorrarComponent,
     EditarAgregarComponent,
     AsignacionesComponent,
+    EditarAgregarTrabajadorComponent,
+    VerBorrarTrabajadorComponent, 
     BarraBuscarComponent,
     EditarAgregarAsignComponent,
     VerBorrarAsignComponent
@@ -46,14 +54,15 @@ import { VerBorrarAsignComponent } from './asignaciones/ver-borrar-asign/ver-bor
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule, // required animations module
-    ToastrModule.forRoot()
-   
-    
+    ToastrModule.forRoot(),
+    NgxPaginationModule
   ],
   providers: [
     ManagmentService,
-    ManagmentAsigService
+    ManagmentAsigService,
+    TrabajadoresService
   ],
+    
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ManagmentService } from 'src/app/services/managment.service';
+import { VerBorrarComponent } from '../ver-borrar/ver-borrar.component';
 
 @Component({
   selector: 'app-editar-agregar',
@@ -7,6 +8,10 @@ import { ManagmentService } from 'src/app/services/managment.service';
   styleUrls: ['./editar-agregar.component.css']
 })
 export class EditarAgregarComponent implements OnInit {
+
+
+ @Output() evntoLista= new EventEmitter<string>();
+ @Output() eventoBuscar= new EventEmitter<string>();
 
 
  @Input() edificio: any;
@@ -18,7 +23,8 @@ export class EditarAgregarComponent implements OnInit {
  categor: string = "";
 
 
-  constructor(private managmentService: ManagmentService) { }
+
+  constructor(private managmentService: ManagmentService, private parent: VerBorrarComponent) { }
 
   ngOnInit(): void {
     this.edificiosId = this.edificio.edificiosId;
@@ -42,7 +48,11 @@ export class EditarAgregarComponent implements OnInit {
     this.managmentService.añadirEdificio(edificio)
         .subscribe( res => {
           console.log(res)
+          this.evntoLista.emit();
+          this.eventoBuscar.emit();
+
         })
+    this.resetForm();
   }
 
   actualizarEdificio(){
@@ -55,10 +65,23 @@ export class EditarAgregarComponent implements OnInit {
       categor : this.categor
     }
 
+
     this.managmentService.actualizarEdificio(edificio)
         .subscribe( res => {
           console.log(res)
+          this.evntoLista.emit();
+          this.eventoBuscar.emit();
+
         })
+  }
+
+  resetForm(){
+    this.edificiosId = 0;
+    this.edificioNum = "";
+    this.edificioDireccion = "";
+    this.tipoEdif = "";
+    this.nivelCal = "";
+    this.categor = "";
   }
 
 }

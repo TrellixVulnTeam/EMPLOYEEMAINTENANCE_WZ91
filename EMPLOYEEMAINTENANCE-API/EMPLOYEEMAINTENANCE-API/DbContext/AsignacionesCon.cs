@@ -36,7 +36,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                             Asignacionid = Convert.ToInt32(dr["ID"]),
                             AsigNum = dr["AsigNum"].ToString(),
                             AsigFechIni = dr["AsigFechIni"].ToString(),
-                            AsigNumDias = dr["AsigNumDias"].ToString(),
+                            AsigNumDias = dr["AsigNumDias"].ToString(), 
                             EdificioNum_fk = Convert.ToInt32(dr["EdificioNum_fk"]),
                             TrabajadorNum_fk = Convert.ToInt32(dr["TrabajadorNum_fk"]),
                         };
