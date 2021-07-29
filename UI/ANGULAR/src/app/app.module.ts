@@ -15,6 +15,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TrabajadoresService } from './services/trabajadores.service';
 import { EditarAgregarTrabajadorComponent } from './trabajadores/editar-agregar-trabajador/editar-agregar-trabajador.component';
 import { VerBorrarTrabajadorComponent } from './trabajadores/ver-borrar-trabajador/ver-borrar-trabajador.component';
+import { BarraBuscarComponent } from './barra-buscar/barra-buscar.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { VerBorrarTrabajadorComponent } from './trabajadores/ver-borrar-trabajad
     VerBorrarComponent,
     EditarAgregarComponent,
     EditarAgregarTrabajadorComponent,
-    VerBorrarTrabajadorComponent
+    VerBorrarTrabajadorComponent,
+    BarraBuscarComponent,
 
   ],
   imports: [

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ManagmentService } from 'src/app/services/managment.service';
 
 @Component({
   selector: 'app-editar-agregar',
