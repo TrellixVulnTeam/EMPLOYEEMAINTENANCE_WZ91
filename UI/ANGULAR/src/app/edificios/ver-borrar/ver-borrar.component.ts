@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit } from '@angular/core';
 import { ManagmentService } from 'src/app/services/managment.service';
 
@@ -17,7 +18,7 @@ export class VerBorrarComponent implements OnInit {
   parametroBusqueda: string = "";
   lastSearch: string = "";
 
-  constructor(private managementService: ManagmentService) { }
+  constructor(public managementService: ManagmentService) { }
 
   ngOnInit(): void {
     this.asignarDatosEdificios();
@@ -54,6 +55,9 @@ export class VerBorrarComponent implements OnInit {
   cerrarModalAgregar(){
     this.modalActivo = false;
     this.verDetalleEdificio = false;
+    if(!this.lastSearch){
+      this.asignarDatosEdificios();
+    }
   }
 
   abrirModalEditar(edificio: any){
@@ -63,7 +67,7 @@ export class VerBorrarComponent implements OnInit {
   }
 
   eliminarEdificio(id: any){
-      if(confirm("Are you sure you want to delete this record ?")){
+      if(confirm("Seguro que quiere eliminar este registro?")){
         this.managementService.eliminarEdificio(id)
             .subscribe( res => console.log("Edificio elmininado"))
         setTimeout(() => {
@@ -77,12 +81,11 @@ export class VerBorrarComponent implements OnInit {
   buscar(parametroBusqueda: any){
     if(parametroBusqueda === this.lastSearch) return ;
     this.lastSearch = parametroBusqueda
+    this.managementService.busqueda = parametroBusqueda
     this.managementService.buscarEdificio()
         .subscribe( edificios => {
-          console.log(parametroBusqueda)
-          console.log(edificios)
            this.edificios = edificios.filter( (edificio:any) =>      
-           edificio.edificioDireccion.trim().toLowerCase().includes(parametroBusqueda.toLowerCase())
+           edificio.edificioDireccion.toLowerCase().includes(this.managementService.busqueda.trim().toLowerCase())
           )
         })
   }
