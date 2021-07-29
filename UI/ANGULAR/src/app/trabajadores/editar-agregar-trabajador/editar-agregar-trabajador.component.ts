@@ -18,7 +18,8 @@ export class EditarAgregarTrabajadorComponent implements OnInit {
   trabajadorTarif: string=''
   oficio: string=''
   trabajadorSuper:string=''
-  
+  activarBoton:Boolean = true;
+
   ngOnInit(): void {
     this.trabajadorid=  this.emp.trabajadorid;
     this.trabajadorNum=  this.emp.trabajadorNum;
@@ -28,8 +29,20 @@ export class EditarAgregarTrabajadorComponent implements OnInit {
     this.trabajadorSuper=  this.emp.trabajadorSuper;
 
   }
+  validarInputs(){
+    if(this.trabajadorNomb==''){
+      this.activarBoton=false;
+    }
+
+    else{
+      this.activarBoton=true;
+
+    }
+
+  }
 
   agregarTrabajador(){
+    console.log()
    let val = {
       trabajadorNum: this.trabajadorNum,
       trabajadorNomb: this.trabajadorNomb,

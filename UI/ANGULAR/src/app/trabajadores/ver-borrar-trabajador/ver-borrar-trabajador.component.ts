@@ -15,6 +15,7 @@ export class VerBorrarTrabajadorComponent implements OnInit {
   detalleTrabajador: any [] = [];
   verDetalleTrabajador:Boolean = false;
   modalActivo: boolean= false;
+  p:number =1;
   constructor(private service:TrabajadoresService) { }
   ngOnInit(): void {
     this.refreshEmpList();
@@ -31,6 +32,8 @@ export class VerBorrarTrabajadorComponent implements OnInit {
     this.ModalTitle ="Detalles de Trabajador"
     this.detalleTrabajador=[];
   }
+
+    
   addClick(){
     this.emp={
       trabajadorid: 0,
@@ -46,15 +49,14 @@ export class VerBorrarTrabajadorComponent implements OnInit {
   }
  
   eliminarClick(item: any){
-    if(confirm('Are you sure'))
-    {
+   
       this.service.deleteEmp(item.trabajadorid).subscribe(data=>
         console.log(data));
-    }
+    
     setTimeout(() => {
       this.refreshEmpList();
 
-    }, 1000);
+    }, 300);
 
   }
   closeClick(){

@@ -16,6 +16,7 @@ import { TrabajadoresService } from './services/trabajadores.service';
 import { EditarAgregarTrabajadorComponent } from './trabajadores/editar-agregar-trabajador/editar-agregar-trabajador.component';
 import { VerBorrarTrabajadorComponent } from './trabajadores/ver-borrar-trabajador/ver-borrar-trabajador.component';
 import { BarraBuscarComponent } from './barra-buscar/barra-buscar.component';
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { BarraBuscarComponent } from './barra-buscar/barra-buscar.component';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule
   ],
   providers: [ManagmentService, TrabajadoresService],
   bootstrap: [AppComponent]

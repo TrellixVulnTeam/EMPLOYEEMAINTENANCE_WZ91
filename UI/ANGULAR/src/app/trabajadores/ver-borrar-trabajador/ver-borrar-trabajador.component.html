@@ -5,7 +5,7 @@
     Añadir  
 </button>
   
-<table class="table table-striped text-center">
+<table class="table table-striped ">
  
     <thead>
         <tr>
@@ -23,7 +23,7 @@
 
     </thead>
     <tbody >
-        <tr *ngFor="let item of employeeList">
+        <tr *ngFor="let item of employeeList | paginate: { itemsPerPage: 10, currentPage: p }">
             <td>{{item.trabajadorNum}}</td>
             <td>{{item.trabajadorNomb}}</td>
             <td>{{item.trabajadorTarif}}</td>
@@ -45,9 +45,13 @@
             </td>
 
         </tr>
+      
+       
+
     </tbody>
 </table>
-
+  <pagination-controls class="text-center"  previousLabel="Anterior"
+  nextLabel="Siguiente" (pageChange)="p = $event"></pagination-controls>
 
 <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -86,9 +90,7 @@
         <div class="modal-body">
             <app-editar-agregar-trabajador [emp]="emp" *ngIf="ActivateAddEditEmpComp"></app-editar-agregar-trabajador>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        </div>
+      
       </div>
     </div>
   </div>
