@@ -27,7 +27,7 @@ import { BarraBuscarComponent } from './barra-buscar/barra-buscar.component';
     VerBorrarComponent,
     EditarAgregarComponent,
     EditarAgregarTrabajadorComponent,
-    VerBorrarTrabajadorComponent,
+    VerBorrarTrabajadorComponent, 
     BarraBuscarComponent,
 
   ],
