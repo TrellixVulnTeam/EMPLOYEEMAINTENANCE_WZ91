@@ -119,6 +119,8 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                     SqlCommand cmd = new SqlCommand("actualizarAsignacion", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
+
+                cmd.Parameters.AddWithValue("@ID", model.Asignacionid);
                     cmd.Parameters.AddWithValue("@AsigNum", model.AsigNum);
                     cmd.Parameters.AddWithValue("@AsigFechIni", model.AsigFechIni);
                     cmd.Parameters.AddWithValue("@AsigNumDias", model.AsigNumDias);

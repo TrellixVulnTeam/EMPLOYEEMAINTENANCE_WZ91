@@ -14,19 +14,25 @@ export class ManagmentAsigService {
     return this.http.get<any>(`${this.BaseApiUrl}/Asignaciones`);
   }
 
-  añadirAsignaciones(Asignaciones: any){
-    return this.http.post(`${this.BaseApiUrl}/Asignaciones`, Asignaciones)
+  añadirAsignaciones(Asignacion: any){
+    return this.http.post(`${this.BaseApiUrl}/Asignaciones`, Asignacion)
   }
 
   actualizarAsignaciones(Asignaciones: any){
-    return this.http.put(`${this.BaseApiUrl}/Asignaciones/${Asignaciones.AsignacionesId}`, Asignaciones)
+    
+    console.log(Asignaciones)
+    console.log(Asignaciones.Asignacionid)
+    return this.http.put(`${this.BaseApiUrl}/Asignaciones/${Asignaciones.Asignacionid}`, Asignaciones)
   }
 
   eliminarAsignaciones(id: any){
     return this.http.delete(`${this.BaseApiUrl}/Asignaciones/${id}`);
   }
 
-  verAsignaciones(id: any){
+  verAsignacion(id: any){
       return this.http.get(`${this.BaseApiUrl}/Asignaciones/${id}`)
+  }
+  buscarAsignacion(){
+    return this.http.get<any>(`${this.BaseApiUrl}/Asignaciones`);
   }
 }
