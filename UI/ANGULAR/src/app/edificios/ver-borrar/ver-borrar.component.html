@@ -1,5 +1,9 @@
 
-  
+  <!-- Button trigger modal -->
+  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+  (click)="abrirModalAgregar()">
+    Agregar Edificio
+  </button>
   <!-- Modal -->
   <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -51,7 +55,7 @@
       </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let edificio of edificios">
+        <tr *ngFor="let edificio of edificios | paginate: { itemsPerPage: 10, currentPage: p}">
             <td>{{edificio.edificiosId}}</td>
             <td>{{edificio.edificioNum}}</td>
             <td>{{edificio.edificioDireccion}}</td>
@@ -69,10 +73,8 @@
         </tr>
     </tbody>
   </table>
+  <pagination-controls class="text-center"  previousLabel="Anterior"
+  nextLabel="Siguiente" (pageChange)="p = $event"></pagination-controls>
 
-  <!-- Button trigger modal -->
-  <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-  (click)="abrirModalAgregar()">
-    Agregar Edificio
-  </button>
+  
    

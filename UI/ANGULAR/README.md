@@ -1,3 +1,9 @@
+## Install required
+npm install
+npm install bootstrap
+npm install ngx-toastr --save
+npm install ngx-pagination --save
+
 # ANGULAR
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.1.1.
