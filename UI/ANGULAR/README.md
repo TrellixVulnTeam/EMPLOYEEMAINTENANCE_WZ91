@@ -1,7 +1,8 @@
 ## Install required
+npm install
 npm install bootstrap
 npm install ngx-toastr --save
-npm install animate.css --save
+npm install ngx-pagination --save
 
 # ANGULAR
 
