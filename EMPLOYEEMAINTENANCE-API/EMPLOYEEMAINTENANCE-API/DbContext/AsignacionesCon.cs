@@ -83,8 +83,9 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                     SqlCommand cmd = new SqlCommand("insertarAsignacion", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
+                    cmd.Parameters.AddWithValue("@ID", model.Asignacionid);
                     cmd.Parameters.AddWithValue("@AsigNum", model.AsigNum);
-                    cmd.Parameters.AddWithValue("@AsigFechIni", DateTime.Parse(model.AsigFechIni)); //
+                    cmd.Parameters.AddWithValue("@AsigFechIni", DateTime.Parse(model.AsigFechIni)); 
                     cmd.Parameters.AddWithValue("@AsigNumDias", model.AsigNumDias);
                     cmd.Parameters.AddWithValue("@EdificioNum_fk", model.EdificioNum_fk);
                     cmd.Parameters.AddWithValue("@TrabajadorNum_fk", model.TrabajadorNum_fk);
