@@ -10,13 +10,16 @@ import { TrabajadoresComponent } from './trabajadores/trabajadores.component';
 const routes: Routes = [
 
     {
+        path:'',
+        component: TrabajadoresComponent,
+        
+    },
+
+    {
         path:'edificios',
         component: EdificiosComponent
     },
-    {
-        path:'trabajadores',
-        component: TrabajadoresComponent
-    },
+    
     {
         path:'asignaciones',
         component: AsignacionesComponent
