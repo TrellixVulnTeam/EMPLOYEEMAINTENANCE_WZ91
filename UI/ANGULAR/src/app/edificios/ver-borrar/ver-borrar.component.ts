@@ -17,6 +17,7 @@ export class VerBorrarComponent implements OnInit {
   detalleEdificio: any = [];
   parametroBusqueda: string = "";
   lastSearch: string = "";
+  p:number =1;
 
   constructor(public managementService: ManagmentService) { }
 

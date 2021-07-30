@@ -16,6 +16,7 @@ export class VerBorrarAsignComponent implements OnInit {
   detalleAsignacion   : any = [];
   parametroBusqueda   : string = "";
   lastSearch          : string = "";
+  p:number =1;
 
   constructor(private managementService: ManagmentAsigService) { }
 
