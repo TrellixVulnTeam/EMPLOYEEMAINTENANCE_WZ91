@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ANGULAR';
+  @Output() onEnter:EventEmitter<string> = new EventEmitter();
+
+  parametroBusqueda: string = "";
+  @Input() placeholder: string = "";
+
+  buscar(){
+    this.onEnter.emit(this.parametroBusqueda);
+  }
 }

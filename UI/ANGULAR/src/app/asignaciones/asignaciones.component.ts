@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators  } from "@angular/forms";
-import { ToastrService } from 'ngx-toastr';
-import { ManagmentAsigService } from '../services/managment-asig.service';
+// import { FormBuilder, FormGroup, Validators  } from "@angular/forms";
+// import { ToastrService } from 'ngx-toastr';
+// import { ManagmentAsigService } from '../services/managment-asig.service';
 
 
 @Component({

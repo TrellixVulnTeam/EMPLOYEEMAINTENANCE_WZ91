@@ -47,6 +47,9 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
     VerBorrarAsignComponent
 
   ],
+  exports:[
+BarraBuscarComponent
+  ],
   imports: [
     BrowserModule,
     HttpClientModule,
