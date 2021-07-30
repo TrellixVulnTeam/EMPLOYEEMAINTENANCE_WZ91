@@ -37,12 +37,12 @@ export class EditarAgregarComponent implements OnInit {
 
   agregarEdificio(){
     var edificio = {
-      edificiosId : this.edificiosId,
-      edificioNum : this.edificioNum,
-      edificioDireccion : this.edificioDireccion,
-      tipoEdif : this.tipoEdif,
-      nivelCal : this.nivelCal,
-      categor : this.categor
+      edificiosId : this.edificiosId.toString(),
+      edificioNum : this.edificioNum.toString(),
+      edificioDireccion : this.edificioDireccion.toString(),
+      tipoEdif : this.tipoEdif.toString(),
+      nivelCal : this.nivelCal.toString(),
+      categor : this.categor.toString()
     }
 
     this.managmentService.añadirEdificio(edificio)
@@ -57,12 +57,12 @@ export class EditarAgregarComponent implements OnInit {
 
   actualizarEdificio(){
     var edificio = {
-      edificiosId : this.edificiosId,
-      edificioNum : this.edificioNum,
-      edificioDireccion : this.edificioDireccion,
-      tipoEdif : this.tipoEdif,
-      nivelCal : this.nivelCal,
-      categor : this.categor
+      edificiosId : this.edificiosId.toString(),
+      edificioNum : this.edificioNum.toString(),
+      edificioDireccion : this.edificioDireccion.toString(),
+      tipoEdif : this.tipoEdif.toString(),
+      nivelCal : this.nivelCal.toString(),
+      categor : this.categor.toString()
     }
 
 

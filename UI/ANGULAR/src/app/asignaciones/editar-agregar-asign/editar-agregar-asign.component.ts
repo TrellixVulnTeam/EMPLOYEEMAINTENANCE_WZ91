@@ -33,11 +33,11 @@ export class EditarAgregarAsignComponent implements OnInit {
    agregarAsignaciones(){
      var asignaciones = {
       Asignacionid     : this.Asignacionid,
-      AsigNum          : this.AsigNum,
-      AsigFechIni      : this.AsigFechIni,
-      AsigNumDias      : this.AsigNumDias,
-      EdificioNum_fk   : this.EdificioNum_fk,
-      TrabajadorNum_fk : this.TrabajadorNum_fk
+      AsigNum          : this.AsigNum.toString(),
+      AsigFechIni      : this.AsigFechIni.toString(),
+      AsigNumDias      : this.AsigNumDias.toString(),
+      EdificioNum_fk   : this.EdificioNum_fk.toString(),
+      TrabajadorNum_fk : this.TrabajadorNum_fk.toString()
      }
      
      console.log(asignaciones);
@@ -53,12 +53,12 @@ export class EditarAgregarAsignComponent implements OnInit {
  
    actualizarAsignaciones(){
     var asignaciones = {
-      asignacionid     : this.Asignacionid,
-      AsigNum          : this.AsigNum,
-      AsigFechIni      : this.AsigFechIni,
-      AsigNumDias      : this.AsigNumDias,
-      EdificioNum_fk   : this.EdificioNum_fk,
-      TrabajadorNum_fk : this.TrabajadorNum_fk
+      asignacionid     : this.Asignacionid.toString(),
+      AsigNum          : this.AsigNum.toString(),
+      AsigFechIni      : this.AsigFechIni.toString(),
+      AsigNumDias      : this.AsigNumDias.toString(),
+      EdificioNum_fk   : this.EdificioNum_fk.toString(),
+      TrabajadorNum_fk : this.TrabajadorNum_fk.toString()
     }
 
     this.managmentService.actualizarAsignaciones(asignaciones)

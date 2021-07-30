@@ -35,7 +35,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                         {
                             Asignacionid = Convert.ToInt32(dr["ID"]),
                             AsigNum = dr["AsigNum"].ToString(),
-                            AsigFechIni = dr["AsigFechIni"].ToString(),
+                            AsigFechIni = (DateTime.Parse(dr["AsigFechIni"].ToString()).Date).ToString(),
                             AsigNumDias = dr["AsigNumDias"].ToString(), 
                             EdificioNum_fk = Convert.ToInt32(dr["EdificioNum_fk"]),
                             TrabajadorNum_fk = Convert.ToInt32(dr["TrabajadorNum_fk"]),
@@ -64,7 +64,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
 
                         asg.Asignacionid = Convert.ToInt32(dr["ID"]);
                         asg.AsigNum = dr["AsigNum"].ToString();
-                        asg.AsigFechIni = dr["AsigFechIni"].ToString();
+                        asg.AsigFechIni = (DateTime.Parse(dr["AsigFechIni"].ToString()).Date).ToString();
                         asg.AsigNumDias = dr["AsigNumDias"].ToString();
                         asg.EdificioNum_fk = Convert.ToInt32(dr["EdificioNum_fk"]);
                         asg.TrabajadorNum_fk = Convert.ToInt32(dr["TrabajadorNum_fk"]);
@@ -85,7 +85,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
 
                     cmd.Parameters.AddWithValue("@ID", model.Asignacionid);
                     cmd.Parameters.AddWithValue("@AsigNum", model.AsigNum);
-                    cmd.Parameters.AddWithValue("@AsigFechIni", DateTime.Parse(model.AsigFechIni)); 
+                    cmd.Parameters.AddWithValue("@AsigFechIni", model.AsigFechIni); 
                     cmd.Parameters.AddWithValue("@AsigNumDias", model.AsigNumDias);
                     cmd.Parameters.AddWithValue("@EdificioNum_fk", model.EdificioNum_fk);
                     cmd.Parameters.AddWithValue("@TrabajadorNum_fk", model.TrabajadorNum_fk);
@@ -123,7 +123,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
 
                 cmd.Parameters.AddWithValue("@ID", model.Asignacionid);
                     cmd.Parameters.AddWithValue("@AsigNum", model.AsigNum);
-                    cmd.Parameters.AddWithValue("@AsigFechIni", DateTime.Parse(model.AsigFechIni));
+                    cmd.Parameters.AddWithValue("@AsigFechIni", model.AsigFechIni);
                     cmd.Parameters.AddWithValue("@AsigNumDias", model.AsigNumDias);
                     cmd.Parameters.AddWithValue("@EdificioNum_fk", model.EdificioNum_fk);
                     cmd.Parameters.AddWithValue("@TrabajadorNum_fk", model.TrabajadorNum_fk);
