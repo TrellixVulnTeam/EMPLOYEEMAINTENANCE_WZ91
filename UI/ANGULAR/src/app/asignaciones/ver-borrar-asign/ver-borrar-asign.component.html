@@ -52,14 +52,13 @@
       </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let asignacion of asignaciones | paginate: { itemsPerPage: 10, currentPage: p}">
+        <tr *ngFor="let asignacion of asignaciones">
             <td>{{asignacion.asignacionid}}</td>
-            <td>{{asignacion.edificioNum_fk}}</td>
-            <td>{{asignacion.trabajadorNum_fk}}</td>
             <td>{{asignacion.asigNum}}</td>
             <td>{{asignacion.asigFechIni}}</td>
             <td>{{asignacion.asigNumDias}}</td>
-            
+            <td>{{asignacion.edificioNum_fk}}</td>
+            <td>{{asignacion.trabajadorNum_fk}}</td>
             <td> 
               <button class="btn btn-primary  btn-sm mx-1" (click)="verAsignacion(asignacion.asignacionesId)" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 <i class="fas fa-eye"></i></button>

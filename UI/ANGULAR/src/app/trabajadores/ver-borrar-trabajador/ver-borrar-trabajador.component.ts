@@ -8,7 +8,6 @@ import { TrabajadoresService } from 'src/app/services/trabajadores.service';
 })
 export class VerBorrarTrabajadorComponent implements OnInit {
 
-
   employeeList:any=[];
   ModalTitle:string ='';
   ActivateAddEditEmpComp:Boolean = false;
@@ -17,7 +16,6 @@ export class VerBorrarTrabajadorComponent implements OnInit {
   verDetalleTrabajador:Boolean = false;
   modalActivo: boolean= false;
   p:number =1;
-
   constructor(private service:TrabajadoresService) { }
   ngOnInit(): void {
     this.refreshEmpList();
@@ -79,5 +77,4 @@ export class VerBorrarTrabajadorComponent implements OnInit {
     })
   }
 
- 
 }
