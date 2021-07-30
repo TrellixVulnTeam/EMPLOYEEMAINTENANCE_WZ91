@@ -8,7 +8,6 @@ import { TrabajadoresService } from 'src/app/services/trabajadores.service';
 })
 export class VerBorrarTrabajadorComponent implements OnInit {
 
-
   employeeList:any=[];
   ModalTitle:string ='';
   ActivateAddEditEmpComp:Boolean = false;
@@ -17,6 +16,8 @@ export class VerBorrarTrabajadorComponent implements OnInit {
   verDetalleTrabajador:Boolean = false;
   modalActivo: boolean= false;
   p:number =1;
+  parametroBusqueda: string = "";
+  lastSearch: string = "";
 
   constructor(private service:TrabajadoresService) { }
   ngOnInit(): void {
@@ -78,6 +79,16 @@ export class VerBorrarTrabajadorComponent implements OnInit {
       console.log(data);
     })
   }
+  buscar(parametroBusqueda: any){
+    if(parametroBusqueda === this.lastSearch) return ;
+    this.lastSearch = parametroBusqueda
+    this.service.busqueda = parametroBusqueda
+    this.service.buscartrabajador()
+        .subscribe( trabajadores => {
+           this.employeeList = trabajadores.filter( (trabajador:any) =>      
+           trabajador.trabajadorNomb.toLowerCase().includes(this.service.busqueda.trim().toLowerCase())
+          )
+        })
+  }
 
- 
 }

@@ -38,7 +38,7 @@
 <hr>
 
 <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="!edificios.length">
-  <strong>Sin resultados para {{parametroBusqueda}}</strong> 
+  <strong>Sin resultados </strong> 
   <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 
@@ -55,7 +55,7 @@
       </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let edificio of edificios | paginate: { itemsPerPage: 10, currentPage: p}">
+        <tr *ngFor="let edificio of edificios | paginate: { itemsPerPage: 10, currentPage: p }">
             <td>{{edificio.edificiosId}}</td>
             <td>{{edificio.edificioNum}}</td>
             <td>{{edificio.edificioDireccion}}</td>

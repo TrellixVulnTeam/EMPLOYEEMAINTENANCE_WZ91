@@ -9,6 +9,13 @@ import { TrabajadoresComponent } from './trabajadores/trabajadores.component';
 
 const routes: Routes = [
 
+
+    {
+    path: '',
+    redirectTo: 'trabajadores',
+    pathMatch:'full'
+    },
+
     {
         path:'',
         component: TrabajadoresComponent,

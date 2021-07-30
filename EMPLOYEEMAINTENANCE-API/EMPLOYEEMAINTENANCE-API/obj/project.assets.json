@@ -633,20 +633,30 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\xavie\\.nuget\\packages\\": {}
+    "C:\\Users\\l.franco\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {},
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Reivax\\Repositorios\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj",
+      "projectUniqueName": "C:\\Users\\l.franco\\Desktop\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj",
       "projectName": "EMPLOYEEMAINTENANCE-API",
-      "projectPath": "C:\\Reivax\\Repositorios\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj",
-      "packagesPath": "C:\\Users\\xavie\\.nuget\\packages\\",
-      "outputPath": "C:\\Reivax\\Repositorios\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\obj\\",
+      "projectPath": "C:\\Users\\l.franco\\Desktop\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API.csproj",
+      "packagesPath": "C:\\Users\\l.franco\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\l.franco\\Desktop\\EMPLOYEEMAINTENANCE\\EMPLOYEEMAINTENANCE-API\\EMPLOYEEMAINTENANCE-API\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\",
+        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+      ],
       "configFilePaths": [
-        "C:\\Users\\xavie\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\l.franco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
