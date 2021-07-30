@@ -22,7 +22,7 @@ export class ManagmentAsigService {
     
     console.log(Asignaciones)
     console.log(Asignaciones.Asignacionid)
-    return this.http.put(`${this.BaseApiUrl}/Asignaciones/${Asignaciones.Asignacionid}`, Asignaciones)
+    return this.http.put(`${this.BaseApiUrl}/Asignaciones/${Asignaciones.asignacionid}`, Asignaciones)
   }
 
   eliminarAsignaciones(id: any){

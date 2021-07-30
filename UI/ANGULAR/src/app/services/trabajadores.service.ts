@@ -7,6 +7,7 @@ import { Observable } from "rxjs";
 export class TrabajadoresService {
 
   readonly APIurl ="https://localhost:44347"
+  busqueda:string = ""
 
   constructor(private http:HttpClient) { }
 
@@ -31,5 +32,9 @@ export class TrabajadoresService {
   getbyId(val:any){
 
     return this.http.get<any>(this.APIurl+'/api/Trabajador/'+val);
+  }
+
+  buscartrabajador(){
+    return this.http.get<any>(`${this.APIurl}/api/Trabajador`);
   }
 }

@@ -55,7 +55,7 @@
       </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let edificio of edificios">
+        <tr *ngFor="let edificio of edificios | paginate: { itemsPerPage: 10, currentPage: p }">
             <td>{{edificio.edificiosId}}</td>
             <td>{{edificio.edificioNum}}</td>
             <td>{{edificio.edificioDireccion}}</td>

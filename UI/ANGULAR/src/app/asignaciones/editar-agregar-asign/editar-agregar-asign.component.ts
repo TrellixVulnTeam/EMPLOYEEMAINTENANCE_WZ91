@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ManagmentAsigService } from '../../services/managment-asig.service';
+import { VerBorrarAsignComponent } from '../ver-borrar-asign/ver-borrar-asign.component';
 
 @Component({
   selector: 'app-editar-agregar-asign',
@@ -18,7 +19,7 @@ export class EditarAgregarAsignComponent implements OnInit {
  
   // feedbackAlert: boolean = false;
  
-   constructor(private managmentService: ManagmentAsigService) { }
+   constructor(private managmentService: ManagmentAsigService, private refresh : VerBorrarAsignComponent) { }
  
    ngOnInit(): void {
      this.Asignacionid     = this.asignacion.asignacionid;
@@ -38,16 +39,21 @@ export class EditarAgregarAsignComponent implements OnInit {
       EdificioNum_fk   : this.EdificioNum_fk,
       TrabajadorNum_fk : this.TrabajadorNum_fk
      }
- 
+     
+     console.log(asignaciones);
      this.managmentService.añadirAsignaciones(asignaciones)
                           .subscribe( res => {
            console.log(res)
          })
+         setTimeout(() => {
+           this.refresh.asignarDatosAsignaciones();
+         }, 500);
+
    }
  
    actualizarAsignaciones(){
     var asignaciones = {
-      Asignacionid     : this.Asignacionid,
+      asignacionid     : this.Asignacionid,
       AsigNum          : this.AsigNum,
       AsigFechIni      : this.AsigFechIni,
       AsigNumDias      : this.AsigNumDias,
@@ -59,6 +65,10 @@ export class EditarAgregarAsignComponent implements OnInit {
         .subscribe( res => {
           console.log(res)
         })
+
+        setTimeout(() => {
+          this.refresh.asignarDatosAsignaciones();
+        }, 500);
    }
 
  }

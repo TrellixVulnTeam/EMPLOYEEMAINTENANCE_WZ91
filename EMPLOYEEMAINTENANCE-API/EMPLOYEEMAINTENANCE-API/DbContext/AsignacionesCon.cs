@@ -123,7 +123,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
 
                 cmd.Parameters.AddWithValue("@ID", model.Asignacionid);
                     cmd.Parameters.AddWithValue("@AsigNum", model.AsigNum);
-                    cmd.Parameters.AddWithValue("@AsigFechIni", model.AsigFechIni);
+                    cmd.Parameters.AddWithValue("@AsigFechIni", DateTime.Parse(model.AsigFechIni));
                     cmd.Parameters.AddWithValue("@AsigNumDias", model.AsigNumDias);
                     cmd.Parameters.AddWithValue("@EdificioNum_fk", model.EdificioNum_fk);
                     cmd.Parameters.AddWithValue("@TrabajadorNum_fk", model.TrabajadorNum_fk);

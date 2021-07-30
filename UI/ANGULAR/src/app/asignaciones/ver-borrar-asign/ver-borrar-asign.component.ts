@@ -38,12 +38,15 @@ export class VerBorrarAsignComponent implements OnInit {
     this.verDetalleAsignacion = true;
     this.detalleAsignacion    =[];
     this.tituloModal          ="Detalles de Asignaciones"
+
+    console.log(this.asignaciones);
+
     
   }
 
   abrirModalAgregar(){
     this.asignacion = {
-      asignacionesId  : 0,
+      Asignacionid  : 0,
       AsigNum         : "",
       AsigFechIni     : "",
       AsigNumDias     : "",
@@ -62,6 +65,7 @@ export class VerBorrarAsignComponent implements OnInit {
   abrirModalEditar(asignacion: any){
 
     this.asignacion  = asignacion;
+    console.log(asignacion);
     this.tituloModal = "Editar Asignación"
     this.modalActivo = true;
     

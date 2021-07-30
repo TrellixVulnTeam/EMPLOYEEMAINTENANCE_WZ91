@@ -2,7 +2,7 @@
 
     <div class="mb-3">
         <label for="Asignacionid" class="form-label">ID :</label>
-        <input type="text"  [value]="Asignacionid"  id="Asignacionid" aria-describedby="emailHelp" disabled readonly>
+        <input type="text"  [value]="Asignacionid"    disabled readonly>
       </div>
       <div class="mb-3">
         <label for="EdificioNum_fk" class="form-label">Numero de edificio:</label>
@@ -28,8 +28,8 @@
   
       
   
-      <button (click)="agregarAsignaciones()" class="btn btn-primary mx-2" *ngIf="asignacion.asignacionid==0">Guardar</button>
-      <button (click)="actualizarAsignaciones()" class="btn btn-info "   *ngIf="asignacion.asignacionid!=0">Guardar cambios</button>
+      <button (click)="agregarAsignaciones()" class="btn btn-primary mx-2" *ngIf="asignacion.Asignacionid==0">Guardar</button>
+      <button (click)="actualizarAsignaciones()" class="btn btn-info "   *ngIf="asignacion.Asignacionid!=0">Guardar cambios</button>
   
   
   

@@ -43,13 +43,13 @@ export class EditarAgregarTrabajadorComponent implements OnInit {
 
   agregarTrabajador(){
     console.log()
-   let val = {
-      trabajadorNum: this.trabajadorNum,
-      trabajadorNomb: this.trabajadorNomb,
-      trabajadorTarif: this.trabajadorTarif,
-      oficio: this.oficio,
-      trabajadorSuper: this.trabajadorSuper
-  }
+    let val = {
+      trabajadorNum: this.trabajadorNum.toString(),
+        trabajadorNomb: this.trabajadorNomb.toString(),
+        trabajadorTarif: this.trabajadorTarif.toString(),
+        oficio: this.oficio,
+        trabajadorSuper: this.trabajadorSuper.toString()
+    }
 
    this.service.addEmp(val).subscribe(res=>{
   console.log(res.toString());    });
@@ -69,14 +69,13 @@ export class EditarAgregarTrabajadorComponent implements OnInit {
 
     console.log(this.trabajadorid);   
     let val = {
-      trabajadorid: this.trabajadorid,
-      trabajadorNum: this.trabajadorNum,
-      trabajadorNomb: this.trabajadorNomb,
-      trabajadorTarif: this.trabajadorTarif,
-      oficio: this.oficio,
-      trabajadorSuper: this.trabajadorSuper
+      trabajadorid: this.trabajadorid.toString(),
+      trabajadorNum: this.trabajadorNum.toString(),
+      trabajadorNomb: this.trabajadorNomb.toString(),
+      trabajadorTarif: this.trabajadorTarif.toString(),
+      oficio: this.oficio.toString(),
+      trabajadorSuper: this.trabajadorSuper.toString()
   }
-
    this.service.updateEmp(val).subscribe(res=>{
   console.log(res);    });
   setTimeout(() => {
