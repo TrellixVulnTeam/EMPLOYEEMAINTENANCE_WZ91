@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using EMPLOYEEMAINTENANCE_API.DTO;
+using System.Collections.Generic;
 
 namespace EMPLOYEEMAINTENANCE_API.Models
 {
     public interface IEdificiosCon
     {
-        void Actualizar(Edificios model, int id);
-        void Añadir(Edificios model);
-        void Borrar(int? id);
-        Edificios BuscarPorID(int id);
-        IEnumerable<Edificios> Lists();
+        bool Actualizar(EdificiosActualizarDTO model, int id);
+        bool Añadir(EdificiosAgregarDTO model);
+        bool Borrar(int? id);
+        EdificiosActualizarDTO BuscarPorID(int id);
+        IEnumerable<EdificiosActualizarDTO> Lists();
     }
 }

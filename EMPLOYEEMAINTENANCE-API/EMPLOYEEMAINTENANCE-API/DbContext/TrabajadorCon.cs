@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using EMPLOYEEMAINTENANCE_API.DTO;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,16 +13,19 @@ namespace EMPLOYEEMAINTENANCE_API.Models
     public class TrabajadorCon : ITrabajadorCon
     {
         IConfiguration _configuration;
-        public TrabajadorCon(IConfiguration configuration)
+        private readonly IMapper _mapper;
+
+        public TrabajadorCon(IConfiguration configuration, IMapper mapper)
         {
             _configuration = configuration;
+            _mapper = mapper;
         }
 
       //  string ConnectionString = "Server=.;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
 
-        public IEnumerable<Trabajador> Lists()
+        public IEnumerable<TrabajadorActualizarDTO> Lists()
         {
-            List<Trabajador> listTrabajadores = new List<Trabajador>();
+            List<TrabajadorActualizarDTO> listTrabajadores = new List<TrabajadorActualizarDTO>();
 
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
             {
@@ -39,18 +44,19 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                         Oficio = dr["Oficio"].ToString(),
                         TrabajadorSuper = dr["TrabajadorSuper"].ToString()
                     };
-
-                    listTrabajadores.Add(trb);
+                    var trabajadorDTO = _mapper.Map<TrabajadorActualizarDTO>(trb);
+                    listTrabajadores.Add(trabajadorDTO);
 
                 }
                 con.Close();
 
             }
+
             return listTrabajadores;
 
         }
 
-        public Trabajador BuscarPorID(int id)
+        public TrabajadorActualizarDTO BuscarPorID(int id)
         {
             Trabajador trb = new Trabajador();
 
@@ -74,33 +80,45 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 con.Close();
 
             }
-            return trb;
+            var trabajadorDTO = _mapper.Map<TrabajadorActualizarDTO>(trb);
+
+            return trabajadorDTO;
 
         }
 
-        public void Añadir(Trabajador model)
+        public bool Añadir(TrabajadorAgregarDTO model)
         {
+            bool res = false;
+            var TRABAJADOR = _mapper.Map<Trabajador>(model);
+
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
             {
                 SqlCommand cmd = new SqlCommand("insertarTrabajador", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@TrabajadorNomb", model.TrabajadorNomb);
-                cmd.Parameters.AddWithValue("@TrabajadorNum", model.TrabajadorNum);
-                cmd.Parameters.AddWithValue("@TrabajadorSuper", model.TrabajadorSuper);
-                cmd.Parameters.AddWithValue("@TrabajadorTarif", model.TrabajadorTarif);
-                cmd.Parameters.AddWithValue("@Oficio", model.Oficio);
+                cmd.Parameters.AddWithValue("@TrabajadorNomb", TRABAJADOR.TrabajadorNomb);
+                cmd.Parameters.AddWithValue("@TrabajadorNum", TRABAJADOR.TrabajadorNum);
+                cmd.Parameters.AddWithValue("@TrabajadorSuper", TRABAJADOR.TrabajadorSuper);
+                cmd.Parameters.AddWithValue("@TrabajadorTarif", TRABAJADOR.TrabajadorTarif);
+                cmd.Parameters.AddWithValue("@Oficio", TRABAJADOR.Oficio);
 
                 con.Open();
-                cmd.ExecuteNonQuery();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    res = true;
+                }
                 con.Close();
             }
+            return res;
+
 
         }
 
-        public void Borrar(int? id)
+        public bool Borrar(int? id)
         {
+            bool res = false;
+
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
             {
@@ -111,33 +129,44 @@ namespace EMPLOYEEMAINTENANCE_API.Models
 
 
                 con.Open();
-                cmd.ExecuteNonQuery();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    res = true;
+                }
                 con.Close();
             }
+            return res;
 
         }
 
 
-        public void Actualizar(Trabajador model, int id)
+        public bool Actualizar(TrabajadorActualizarDTO model, int id)
         {
-            model.Trabajadorid = id;
+            bool res = false;
+            var trabajador = _mapper.Map<Trabajador>(model);
+            trabajador.Trabajadorid = id;
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
             {
                 SqlCommand cmd = new SqlCommand("actualizarTrabajador", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@id", model.Trabajadorid);
-                cmd.Parameters.AddWithValue("@TrabajadorNomb", model.TrabajadorNomb);
-                cmd.Parameters.AddWithValue("@TrabajadorNum", model.TrabajadorNum);
-                cmd.Parameters.AddWithValue("@TrabajadorSuper", model.TrabajadorSuper);
-                cmd.Parameters.AddWithValue("@TrabajadorTarif", model.TrabajadorTarif);
-                cmd.Parameters.AddWithValue("@Oficio", model.Oficio);
+                cmd.Parameters.AddWithValue("@id", trabajador.Trabajadorid);
+                cmd.Parameters.AddWithValue("@TrabajadorNomb", trabajador.TrabajadorNomb);
+                cmd.Parameters.AddWithValue("@TrabajadorNum", trabajador.TrabajadorNum);
+                cmd.Parameters.AddWithValue("@TrabajadorSuper", trabajador.TrabajadorSuper);
+                cmd.Parameters.AddWithValue("@TrabajadorTarif", trabajador.TrabajadorTarif);
+                cmd.Parameters.AddWithValue("@Oficio", trabajador.Oficio);
 
                 con.Open();
-                cmd.ExecuteNonQuery();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    res = true;
+                }
                 con.Close();
             }
+            return res;
+
 
         }
 

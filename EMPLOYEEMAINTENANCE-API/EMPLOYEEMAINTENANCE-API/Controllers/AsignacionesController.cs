@@ -1,11 +1,11 @@
 ﻿using EMPLOYEEMAINTENANCE_API.Models;
+using EMPLOYEEMAINTENANCE_API.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace EMPLOYEEMAINTENANCE_API.Controllers
 {
@@ -20,14 +20,14 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         }
         // GET: api/<AsignacionesController>
         [HttpGet]
-        public IEnumerable<Asignaciones> Get()
+        public IEnumerable<AsignacionesaActualizarDTO> Get()
         {
             return _asignacionesCon.Lists();
         }
 
         // GET api/<AsignacionesController>/5
         [HttpGet("{id}")]
-        public ActionResult <Asignaciones> GetId(int id)
+        public ActionResult <AsignacionesaActualizarDTO> GetId(int id)
         {
             var asignacion = _asignacionesCon.BuscarPorID(id);
             if (asignacion == null)
@@ -39,27 +39,38 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
 
         // POST api/<AsignacionesController>
         [HttpPost]
-        public ActionResult Post([FromBody] Asignaciones model)
+        public ActionResult Post([FromBody] AsignacionesaAgregarDTO model)
         {
+            var res = false;
             if (model != null)
             {
-                _asignacionesCon.Añadir(model);
+               res= _asignacionesCon.Añadir(model);
             }
+            if (!res)
+            {
+                return StatusCode(500);
+            }
+            return Ok(model);
 
-            return CreatedAtAction("GetId", new { id = model.Asignacionid }, model);
         }
 
         // PUT api/<AsignacionesController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Asignaciones model)
+        public ActionResult Put(int id, [FromBody] AsignacionesaActualizarDTO model)
         {
+            var res = false;
+
             if (id != model.Asignacionid)
             {
                 return BadRequest();
             }
             if (model != null)
             {
-                _asignacionesCon.Actualizar(model, id);
+              res =  _asignacionesCon.Actualizar(model, id);
+            }
+            if (!res)
+            {
+                return StatusCode(500);
             }
             return NoContent();
         }
@@ -68,12 +79,19 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
+            bool res;
+
             var asignacion = _asignacionesCon.BuscarPorID(id);
             if (asignacion == null)
             {
                 return NotFound();
             }
-            _asignacionesCon.Borrar(id);
+            res =  _asignacionesCon.Borrar(id);
+
+            if (!res)
+            {
+                return StatusCode(500);
+            }
             return NoContent();
         }
     }

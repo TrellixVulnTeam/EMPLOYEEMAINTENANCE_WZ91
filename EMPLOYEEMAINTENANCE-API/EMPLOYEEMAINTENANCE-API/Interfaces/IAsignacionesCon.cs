@@ -1,13 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using EMPLOYEEMAINTENANCE_API.DTO;
+using System.Collections.Generic;
 
 namespace EMPLOYEEMAINTENANCE_API.Models
 {
     public interface IAsignacionesCon
     {
-        void Actualizar(Asignaciones model, int id);
-        void Añadir(Asignaciones model);
-        void Borrar(int? id);
-        Asignaciones BuscarPorID(int id);
-        IEnumerable<Asignaciones> Lists();
+        bool Actualizar(AsignacionesaActualizarDTO model, int id);
+        bool Añadir(AsignacionesaAgregarDTO model);
+        bool Borrar(int? id);
+        AsignacionesaActualizarDTO BuscarPorID(int id);
+        IEnumerable<AsignacionesaActualizarDTO> Lists();
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using EMPLOYEEMAINTENANCE_API.DTO;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,16 +14,19 @@ namespace EMPLOYEEMAINTENANCE_API.Models
 
     {
         IConfiguration _configuration;
-        public EdificiosCon(IConfiguration configuration)
+        private readonly IMapper _mapper;
+
+        public EdificiosCon(IConfiguration configuration, IMapper mapper)
         {
             _configuration = configuration;
+            _mapper = mapper;
         }
         //string ConnectionString = "Server=.;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
 
         //Get list Edificios
-        public IEnumerable<Edificios> Lists()
+        public IEnumerable<EdificiosActualizarDTO> Lists()
         {
-            List<Edificios> listEdificios = new List<Edificios>();
+            List<EdificiosActualizarDTO> listEdificios = new List<EdificiosActualizarDTO>();
 
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
             {
@@ -40,7 +45,8 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                         NivelCal = dr["NivelCal"].ToString(),
                         Categor = dr["Categor"].ToString()
                     };
-                    listEdificios.Add(edif);
+                    var edficiosDTO = _mapper.Map<EdificiosActualizarDTO>(edif);
+                    listEdificios.Add(edficiosDTO);
                 }
                 con.Close();
             }
@@ -48,7 +54,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
         }
 
         //Read for ID 
-        public Edificios BuscarPorID(int id)
+        public EdificiosActualizarDTO BuscarPorID(int id)
         {
             Edificios edif = new Edificios();
 
@@ -71,64 +77,92 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 con.Close();
 
             }
-            return edif;
+            var edficiosDTO = _mapper.Map<EdificiosActualizarDTO>(edif);
+
+            return edficiosDTO;
         }
         //Create Edificios
-        public void Añadir(Edificios model)
+        public bool Añadir(EdificiosAgregarDTO model)
         {
+            bool res = false;
+            var edficios = _mapper.Map<Edificios>(model);
+
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
             {
+
                 SqlCommand cmd = new SqlCommand("insertarEdificio", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@EdificioNum", model.EdificioNum);
-                cmd.Parameters.AddWithValue("@EdificioDireccion", model.EdificioDireccion);
-                cmd.Parameters.AddWithValue("@TipoEdif", model.TipoEdif);
-                cmd.Parameters.AddWithValue("@NivelCal", model.NivelCal);
-                cmd.Parameters.AddWithValue("@Categor", model.Categor);
+                cmd.Parameters.AddWithValue("@EdificioNum", edficios.EdificioNum);
+                cmd.Parameters.AddWithValue("@EdificioDireccion", edficios.EdificioDireccion);
+                cmd.Parameters.AddWithValue("@TipoEdif", edficios.TipoEdif);
+                cmd.Parameters.AddWithValue("@NivelCal", edficios.NivelCal);
+                cmd.Parameters.AddWithValue("@Categor", edficios.Categor);
 
                 con.Open();
-                cmd.ExecuteNonQuery();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    res = true;
+                }
                 con.Close();
             }
+            return res;
+
         }
 
         //Remove Edificios
-        public void Borrar(int? id)
+        public bool Borrar(int? id)
         {
+            bool res = false;
+
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
             {
+
                 SqlCommand cmd = new SqlCommand("borrarEdificio", con);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@id", id);
                 con.Open();
-                cmd.ExecuteNonQuery();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    res = true;
+                }
                 con.Close();
             }
+            return res;
+
         }
 
         //Update Edificios
-        public void Actualizar(Edificios model, int id)
+        public bool Actualizar(EdificiosActualizarDTO model, int id)
         {
-            model.EdificiosId = id;
+            bool res = false;
+            var edficios = _mapper.Map<Edificios>(model);
+
+            edficios.EdificiosId = id;
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
             {
+
                 SqlCommand cmd = new SqlCommand("actualizarEdificio", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@id", model.EdificiosId);
-                cmd.Parameters.AddWithValue("@EdificioNum", model.EdificioNum);
-                cmd.Parameters.AddWithValue("@EdificioDireccion", model.EdificioDireccion);
-                cmd.Parameters.AddWithValue("@TipoEdif", model.TipoEdif);
-                cmd.Parameters.AddWithValue("@NivelCal", model.NivelCal);
-                cmd.Parameters.AddWithValue("@Categor", model.Categor);
+                cmd.Parameters.AddWithValue("@id", edficios.EdificiosId);
+                cmd.Parameters.AddWithValue("@EdificioNum", edficios.EdificioNum);
+                cmd.Parameters.AddWithValue("@EdificioDireccion", edficios.EdificioDireccion);
+                cmd.Parameters.AddWithValue("@TipoEdif", edficios.TipoEdif);
+                cmd.Parameters.AddWithValue("@NivelCal", edficios.NivelCal);
+                cmd.Parameters.AddWithValue("@Categor", edficios.Categor);
 
                 con.Open();
-                cmd.ExecuteNonQuery();
+                if (cmd.ExecuteNonQuery() > 0)
+                {
+                    res = true;
+                }
                 con.Close();
             }
+            return res;
+
 
         }
     }

@@ -1,4 +1,5 @@
-﻿using EMPLOYEEMAINTENANCE_API.Models;
+﻿using EMPLOYEEMAINTENANCE_API.DTO;
+using EMPLOYEEMAINTENANCE_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using System;
@@ -20,7 +21,7 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         }
         // GET: api/<TrabajadorController>
         [HttpGet]
-        public IEnumerable<Trabajador> Get()
+        public IEnumerable<TrabajadorActualizarDTO> Get()
         {
 
 
@@ -30,7 +31,7 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
 
         // GET api/<TrabajadorController>/5
         [HttpGet("{id}")]
-        public ActionResult<Trabajador> GetId(int id)
+        public ActionResult<TrabajadorActualizarDTO> GetId(int id)
         {
             var trabajador = _trabajadorCon.BuscarPorID(id);
             if (trabajador == null)
@@ -43,31 +44,42 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
 
         // POST api/<TrabajadorController>
         [HttpPost]
-        public ActionResult Post([FromBody] Trabajador model)
+        public ActionResult Post([FromBody] TrabajadorAgregarDTO model)
         {
+            var res = false;
+
             if (model != null)
             {
 
-                _trabajadorCon.Añadir(model);
+              res=  _trabajadorCon.Añadir(model);
             }
-
-            return CreatedAtAction("GetId", new { id = model.Trabajadorid }, model);
+            if (!res)
+            {
+                return StatusCode(500);
+            }
+            return Ok(model);
 
 
         }
 
         // PUT api/<TrabajadorController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Trabajador model)
+        public ActionResult Put(int id, [FromBody] TrabajadorActualizarDTO model)
         {
+            var res = false;
+
             if (id != model.Trabajadorid)
             {
                 return BadRequest();
             }
             if (model != null)
             {
-                _trabajadorCon.Actualizar(model, id);
+               res = _trabajadorCon.Actualizar(model, id);
 
+            }
+            if (!res)
+            {
+                return StatusCode(500);
             }
             return NoContent();
         }
@@ -76,6 +88,7 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
+            bool res;
 
             var trabajador = _trabajadorCon.BuscarPorID(id);
             if (trabajador == null)
@@ -85,7 +98,11 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
             }
 
 
-            _trabajadorCon.Borrar(id);
+            res = _trabajadorCon.Borrar(id);
+            if (!res)
+            {
+                return StatusCode(500);
+            }
             return NoContent();
 
         }

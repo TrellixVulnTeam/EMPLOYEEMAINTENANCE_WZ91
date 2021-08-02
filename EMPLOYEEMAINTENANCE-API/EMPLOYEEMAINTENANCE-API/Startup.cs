@@ -1,3 +1,4 @@
+using EMPLOYEEMAINTENANCE_API.infrastructure.Automap;
 using EMPLOYEEMAINTENANCE_API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -11,6 +12,7 @@ using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace EMPLOYEEMAINTENANCE_API
@@ -29,6 +31,7 @@ namespace EMPLOYEEMAINTENANCE_API
         {
             
             services.AddControllers();
+            services.AddAutoMapper(typeof(automapperConfig).GetTypeInfo().Assembly);
 
             services.AddTransient<IAsignacionesCon, AsignacionesCon>();
             services.AddTransient<ITrabajadorCon, TrabajadorCon>();

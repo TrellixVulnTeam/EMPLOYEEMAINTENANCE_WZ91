@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using AutoMapper;
+using EMPLOYEEMAINTENANCE_API.DTO;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -12,16 +14,19 @@ namespace EMPLOYEEMAINTENANCE_API.Models
     public class AsignacionesCon: IAsignacionesCon
     {
         IConfiguration _configuration;
-        public AsignacionesCon(IConfiguration  configuration)
+        private readonly IMapper _mapper;
+
+        public AsignacionesCon(IConfiguration  configuration, IMapper mapper)
         {
             _configuration = configuration;
+            _mapper = mapper;
         }
         //string ConnectionString = "Server=DTIC-16\\SQLSERVERX;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
 
         //Get list Asignaciones
-        public IEnumerable<Asignaciones> Lists()
+        public IEnumerable<AsignacionesaActualizarDTO> Lists()
             {
-                List<Asignaciones> listAsignaciones = new List<Asignaciones>();
+                List<AsignacionesaActualizarDTO> listAsignaciones = new List<AsignacionesaActualizarDTO>();
 
                 using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
                 {
@@ -31,7 +36,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                     SqlDataReader dr = cmd.ExecuteReader();
                     while (dr.Read())
                     {
-                        Asignaciones asig = new Asignaciones
+                    Asignaciones asig = new Asignaciones
                         {
                             Asignacionid = Convert.ToInt32(dr["ID"]),
                             AsigNum = dr["AsigNum"].ToString(),
@@ -40,7 +45,9 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                             EdificioNum_fk = Convert.ToInt32(dr["EdificioNum_fk"]),
                             TrabajadorNum_fk = Convert.ToInt32(dr["TrabajadorNum_fk"]),
                         };
-                        listAsignaciones.Add(asig);
+
+                    var asignacionesDTO = _mapper.Map<AsignacionesaActualizarDTO>(asig);
+                        listAsignaciones.Add(asignacionesDTO);
                     }
                     con.Close();
                 }
@@ -48,10 +55,10 @@ namespace EMPLOYEEMAINTENANCE_API.Models
             }
 
             //Read for ID 
-            public Asignaciones BuscarPorID(int id)
+            public AsignacionesaActualizarDTO BuscarPorID(int id)
             {
 
-                Asignaciones asg = new Asignaciones();
+            Asignaciones asg = new Asignaciones();
                 using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
                 {
                     SqlCommand cmd = new("asignacionPorId", con);
@@ -72,48 +79,67 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                     };
                     con.Close();
                 }
-                return asg;
+                     var res = _mapper.Map<AsignacionesaActualizarDTO>(asg);
+                return res;
             }
             //Create Asignaciones
-            public void Añadir(Asignaciones model)
+            public bool Añadir(AsignacionesaAgregarDTO model)
             {
-                using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
+            bool res = false;
+                var asg = _mapper.Map<Asignaciones>(model);
+          
+
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
                 {
                     SqlCommand cmd = new SqlCommand("insertarAsignacion", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
-                    cmd.Parameters.AddWithValue("@ID", model.Asignacionid);
-                    cmd.Parameters.AddWithValue("@AsigNum", model.AsigNum);
-                    cmd.Parameters.AddWithValue("@AsigFechIni", model.AsigFechIni); 
-                    cmd.Parameters.AddWithValue("@AsigNumDias", model.AsigNumDias);
-                    cmd.Parameters.AddWithValue("@EdificioNum_fk", model.EdificioNum_fk);
-                    cmd.Parameters.AddWithValue("@TrabajadorNum_fk", model.TrabajadorNum_fk);
+                    cmd.Parameters.AddWithValue("@ID", asg.Asignacionid);
+                    cmd.Parameters.AddWithValue("@AsigNum", asg.AsigNum);
+                    cmd.Parameters.AddWithValue("@AsigFechIni", asg.AsigFechIni); 
+                    cmd.Parameters.AddWithValue("@AsigNumDias", asg.AsigNumDias);
+                    cmd.Parameters.AddWithValue("@EdificioNum_fk", asg.EdificioNum_fk);
+                    cmd.Parameters.AddWithValue("@TrabajadorNum_fk", asg.TrabajadorNum_fk);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
+                   if (cmd.ExecuteNonQuery() > 0)
+                    {
+                    res = true;
+                    } 
                     con.Close();
                 }
+            return res;
             }
 
             //Remove Asignaciones
-            public void Borrar(int? id)
-            {
+            public bool Borrar(int? id)
+        {
+                bool res = false;
+
                 using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
                 {
                     SqlCommand cmd = new SqlCommand("borrarAsignacion", con);
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("@id", id);
                     con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
+                         if (cmd.ExecuteNonQuery() > 0)
+                          {
+                            res = true;
+                            }
+                con.Close();
                 }
-            }
+            return res;
 
-            //Update Asignaciones
-            public void Actualizar(Asignaciones model, int id)
-            {
-                model.Asignacionid = id;
+        }
+
+        //Update Asignaciones
+        public bool Actualizar(AsignacionesaActualizarDTO asg, int id)
+        {
+                 bool res = false;
+                 var model = _mapper.Map<Asignaciones>(asg);
+
+                 model.Asignacionid = id;
                 using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
                 {
@@ -129,12 +155,17 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                     cmd.Parameters.AddWithValue("@TrabajadorNum_fk", model.TrabajadorNum_fk);
 
                     con.Open();
-                    cmd.ExecuteNonQuery();
-                    con.Close();
+                     if (cmd.ExecuteNonQuery() > 0)
+                        {
+                         res = true;
+                     }
+                con.Close();
                 }
+            return res;
 
-            }
+
         }
+    }
 
     }
 

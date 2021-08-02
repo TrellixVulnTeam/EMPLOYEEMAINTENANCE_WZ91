@@ -1,4 +1,5 @@
-﻿using EMPLOYEEMAINTENANCE_API.Models;
+﻿using EMPLOYEEMAINTENANCE_API.DTO;
+using EMPLOYEEMAINTENANCE_API.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,14 +21,14 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         }
         // GET: api/<EdificiosController>
         [HttpGet]
-        public IEnumerable<Edificios> Get()
+        public IEnumerable<EdificiosActualizarDTO> Get()
         {
             return _edificiosCon.Lists();
         }
 
         // GET api/<EdificiosController>/5
         [HttpGet("{id}")]
-        public ActionResult <Edificios> GetId(int id)
+        public ActionResult <EdificiosActualizarDTO> GetId(int id)
         {
             var edificios = _edificiosCon.BuscarPorID(id);
             if (edificios == null)
@@ -39,28 +40,40 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
 
         // POST api/<EdificiosController>
         [HttpPost]
-        public ActionResult Post([FromBody] Edificios model)
+        public ActionResult Post([FromBody] EdificiosAgregarDTO model)
         {
+            var res = false;
 
             if (model !=null)
             {
-                _edificiosCon.Añadir(model);
+               res= _edificiosCon.Añadir(model);
             }
 
-            return CreatedAtAction("GetId", new { id = model.EdificiosId }, model);
+            if (!res)
+            {
+                return StatusCode(500);
+            }
+            return Ok(model);
         }
 
         // PUT api/<EdificiosController>/5
         [HttpPut("{id}")]
-        public ActionResult Put(int id, [FromBody] Edificios model)
+        public ActionResult Put(int id, [FromBody] EdificiosActualizarDTO model)
         {
+            var res = false;
+
             if (id != model.EdificiosId)
             {
                 return BadRequest();
             }
             if (model != null)
             {
-                _edificiosCon.Actualizar(model, id);
+               res= _edificiosCon.Actualizar(model, id);
+            }
+
+            if (!res)
+            {
+                return StatusCode(500);
             }
             return NoContent();
         }
@@ -69,12 +82,21 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         [HttpDelete("{id}")]
         public ActionResult Delete(int id)
         {
+            bool res;
+
             var edificios = _edificiosCon.BuscarPorID(id);
             if (edificios == null)
             {
                 return NotFound();
             }
-            _edificiosCon.Borrar(id);
+
+           res= _edificiosCon.Borrar(id);
+
+
+            if (!res)
+            {
+                return StatusCode(500);
+            }
             return NoContent();
         }
     }
