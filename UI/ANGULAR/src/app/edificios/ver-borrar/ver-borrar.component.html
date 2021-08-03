@@ -30,11 +30,12 @@
       </div>
     </div>
   </div>
-
+  
   <app-barra-buscar 
   (onEnter)="buscar( $event )"
-  placeholder="Buscar por direccion" ></app-barra-buscar>
-  
+  placeholder="Buscar por direccion" >
+</app-barra-buscar> 
+
 <hr>
 
 <div class="alert alert-warning alert-dismissible fade show" role="alert" *ngIf="!edificios.length">

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { ManagmentAsigService } from '../../services/managment-asig.service';
 
 @Component({
@@ -18,7 +19,8 @@ export class VerBorrarAsignComponent implements OnInit {
   lastSearch          : string = "";
   p:number =1;
 
-  constructor(private managementService: ManagmentAsigService) { }
+  constructor(private managementService: ManagmentAsigService,
+              private toastr           :ToastrService) { }
 
   ngOnInit(): void {
     this.asignarDatosAsignaciones();
@@ -79,6 +81,7 @@ export class VerBorrarAsignComponent implements OnInit {
         setTimeout(() => {
           this.asignarDatosAsignaciones();
         }, 500); 
+        this.toastr.error("La asiganción se eliminó correctamente", "Asganción eliminada!")
       }
   }
 

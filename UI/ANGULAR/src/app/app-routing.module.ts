@@ -17,13 +17,16 @@ const routes: Routes = [
     },
 
     {
+        path:'trabajadores',
+        component: TrabajadoresComponent,
+        
+    },
+
+    {
         path:'edificios',
         component: EdificiosComponent
     },
-    {
-        path:'trabajadores',
-        component: TrabajadoresComponent
-    },
+    
     {
         path:'asignaciones',
         component: AsignacionesComponent

@@ -1,6 +1,6 @@
 .home{
    
-    font-size: 500%;
+    font-size: 250%;
     text-align:right;
     animation: bounce; /* referring directly to the animation's @keyframe declaration */
     animation-duration: 2s;  /*don't forget to set a duration! */
