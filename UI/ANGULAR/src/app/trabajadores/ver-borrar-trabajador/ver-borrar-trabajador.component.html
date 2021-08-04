@@ -100,7 +100,7 @@ placeholder="Buscar por Nombre de Trabajador" ></app-barra-buscar>
           </button>
         </div>
         <div class="modal-body">
-            <app-editar-agregar-trabajador [emp]="emp" *ngIf="ActivateAddEditEmpComp"></app-editar-agregar-trabajador>
+            <app-editar-agregar-trabajador [emp]="emp" [list]="employeeList" *ngIf="ActivateAddEditEmpComp"></app-editar-agregar-trabajador>
         </div>
       
       </div>

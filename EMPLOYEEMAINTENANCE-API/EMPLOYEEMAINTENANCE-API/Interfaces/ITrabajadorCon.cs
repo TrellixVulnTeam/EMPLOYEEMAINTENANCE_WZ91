@@ -10,5 +10,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
         bool Borrar(int? id);
         TrabajadorActualizarDTO BuscarPorID(int id);
         IEnumerable<TrabajadorActualizarDTO> Lists();
+        IEnumerable<TrabajadorActualizarDTO> ListsClean();
+
     }
 }

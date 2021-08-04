@@ -14,6 +14,7 @@ namespace EMPLOYEEMAINTENANCE_API.DTO
         public string AsigNum { get; set; }
         [Required]
         [StringLength(20)]
+        [DataType(DataType.Date)]
         public string AsigFechIni { get; set; }
         [Required]
         [StringLength(3)]

@@ -40,7 +40,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                         {
                             Asignacionid = Convert.ToInt32(dr["ID"]),
                             AsigNum = dr["AsigNum"].ToString(),
-                            AsigFechIni = (DateTime.Parse(dr["AsigFechIni"].ToString()).Date).ToString(),
+                            AsigFechIni = dr["AsigFechIni"].ToString(),
                             AsigNumDias = dr["AsigNumDias"].ToString(), 
                             EdificioNum_fk = Convert.ToInt32(dr["EdificioNum_fk"]),
                             TrabajadorNum_fk = Convert.ToInt32(dr["TrabajadorNum_fk"]),
@@ -92,20 +92,22 @@ namespace EMPLOYEEMAINTENANCE_API.Models
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
                 {
+                //usar using aqui
                     SqlCommand cmd = new SqlCommand("insertarAsignacion", con);
                     cmd.CommandType = CommandType.StoredProcedure;
 
                     cmd.Parameters.AddWithValue("@ID", asg.Asignacionid);
                     cmd.Parameters.AddWithValue("@AsigNum", asg.AsigNum);
-                    cmd.Parameters.AddWithValue("@AsigFechIni", asg.AsigFechIni); 
+                    cmd.Parameters.AddWithValue("@AsigFechIni", Convert.ToDateTime( asg.AsigFechIni)); 
                     cmd.Parameters.AddWithValue("@AsigNumDias", asg.AsigNumDias);
                     cmd.Parameters.AddWithValue("@EdificioNum_fk", asg.EdificioNum_fk);
                     cmd.Parameters.AddWithValue("@TrabajadorNum_fk", asg.TrabajadorNum_fk);
 
                     con.Open();
+                   var test = cmd.ExecuteScalar();
                    if (cmd.ExecuteNonQuery() > 0)
                     {
-                    res = true;
+                         res = true;
                     } 
                     con.Close();
                 }

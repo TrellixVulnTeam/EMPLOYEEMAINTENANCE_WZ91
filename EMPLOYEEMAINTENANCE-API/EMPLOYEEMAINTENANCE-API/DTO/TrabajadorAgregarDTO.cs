@@ -13,7 +13,7 @@ namespace EMPLOYEEMAINTENANCE_API.DTO
         public string TrabajadorNum { get; set; }
 
         [Required]
-        [StringLength(15)]
+        [StringLength(25)]
         public string TrabajadorNomb { get; set; }
         [Required]
         [StringLength(6)]

@@ -3,39 +3,47 @@
 
     <label class="mt-2">Nombre Trabajador</label>
     <div class="mt-2">
-        <input type="text" class="form-control" [(ngModel)]="trabajadorNomb"
+        <input type="text" class="form-control" [(ngModel)]="trabajador.trabajadorNomb"
         placeholder="Ingrese Nombre del Trabajador" required>
     </div>
     <label class="mt-2">Numero de Trabajador</label>
     <div class="mt-2">
-        <input type="number" class="form-control" [(ngModel)]="trabajadorNum"
+        <input type="tel" class="form-control" [(ngModel)]="trabajador.trabajadorNum"
         placeholder="Ingrese Numero del Trabajador" required>
     </div>
+  
     <label class="mt-2">Tarifa Trabajador</label>
     <div class="mt-2">
-        <input type="number" class="form-control" [(ngModel)]="trabajadorTarif"
+        <input type="tel" class="form-control" [(ngModel)]="trabajador.trabajadorTarif"
         placeholder="Ingrese Tarifa del Trabajador" required>
     </div>
     <label class="mt-2">Oficio Trabajador</label>
     <div class="mt-2">
-        <input type="text" class="form-control" [(ngModel)]="oficio"
+        <input type="text" class="form-control" [(ngModel)]="trabajador.oficio"
         placeholder="Ingrese Oficio del Trabajador" required>
     </div>
     <label class="mt-2">Supervisor Trabajador</label>
     <div class="mt-2">
-        <input type="number" class="form-control" [(ngModel)]="trabajadorSuper"
-        placeholder="Ingrese Supervisor del Trabajador" required>
+        <select class="form-select" [(ngModel)]="trabajador.trabajadorSuper"   aria-label=".form-select-lg example" required>
+            <option>Seleccione Supervisor</option>
+            <option *ngFor="let item of list" [value]="item.trabajadorNum">
+                {{item.trabajadorNomb}}, {{item.oficio}}  </option>
+        </select>
+    </div>
+
+    <div>
+    
     </div>
 </div>
 
 
 
 <button (click)="agregarTrabajador()" *ngIf="emp.trabajadorid==0 "  class="btn btn-primary  mt-3 float-end" data-bs-dismiss="modal" 
-[disabled]="trabajadorNomb=='' || trabajadorNum.length== 0 || trabajadorTarif.length== 0 || oficio== '' || trabajadorSuper.length== 0">
+[disabled]="trabajador.trabajadorNomb=='' || trabajador.trabajadorNum.length== 0 || trabajador.trabajadorTarif.length== 0 || trabajador.oficio== '' || trabajador.trabajadorSuper.length== 0 ||trabajador.trabajadorSuper== 'Seleccione Supervisor'">
     Añadir
 </button>
 
 <button (click)="actualizarTrabajador()" *ngIf="emp.trabajadorid!=0" class="btn btn-primary mt-3 float-end" data-bs-dismiss="modal"
-[disabled]="trabajadorNomb=='' || trabajadorNum.length== 0 || trabajadorTarif.length== 0 || oficio== '' || trabajadorSuper.length== 0">
+[disabled]="trabajador.trabajadorNomb=='' || trabajador.trabajadorNum.length== 0 || trabajador.trabajadorTarif.length== 0 || trabajador.oficio== '' || trabajador.trabajadorSuper.length== 0">
     Update
 </button>

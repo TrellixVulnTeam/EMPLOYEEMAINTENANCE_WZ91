@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TrabajadoresService } from 'src/app/services/trabajadores.service';
+import { Trabajadores } from '../../interfaces/trabajador.interface';
 
 @Component({
   selector: 'app-ver-borrar-trabajador',
@@ -8,7 +9,7 @@ import { TrabajadoresService } from 'src/app/services/trabajadores.service';
 })
 export class VerBorrarTrabajadorComponent implements OnInit {
 
-  employeeList:any=[];
+  employeeList:Trabajadores[]=[];
   ModalTitle:string ='';
   ActivateAddEditEmpComp:Boolean = false;
   emp:any;
@@ -64,7 +65,6 @@ export class VerBorrarTrabajadorComponent implements OnInit {
   }
   closeClick(){
     this.ActivateAddEditEmpComp=false;
-    window.location.reload();
     this.verDetalleTrabajador= false;
   }
   editClick(item:any){
@@ -74,7 +74,7 @@ export class VerBorrarTrabajadorComponent implements OnInit {
 
   }
   refreshEmpList(){
-    this.service.getEmplist().subscribe(data=>{
+    this.service.getEmplistclean().subscribe(data=>{
       this.employeeList=data;
       console.log(data);
     })

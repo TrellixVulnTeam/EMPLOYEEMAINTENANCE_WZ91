@@ -37,12 +37,44 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 {
                     Trabajador trb = new Trabajador
                     {
-                        Trabajadorid = Convert.ToInt32(dr["ID"]),
                         TrabajadorNum = dr["TrabajadorNum"].ToString(),
                         TrabajadorNomb = dr["TrabajadorNomb"].ToString(),
                         TrabajadorTarif = dr["TrabajadorTarif"].ToString(),
                         Oficio = dr["Oficio"].ToString(),
                         TrabajadorSuper = dr["TrabajadorSuper"].ToString()
+                    };
+                    var trabajadorDTO = _mapper.Map<TrabajadorActualizarDTO>(trb);
+                    listTrabajadores.Add(trabajadorDTO);
+
+                }
+                con.Close();
+
+            }
+
+            return listTrabajadores;
+
+        }
+
+        public IEnumerable<TrabajadorActualizarDTO> ListsClean()
+        {
+            List<TrabajadorActualizarDTO> listTrabajadores = new List<TrabajadorActualizarDTO>();
+
+            using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
+            {
+                SqlCommand cmd = new SqlCommand("ListadoTrabajadoresClean", con);
+                cmd.CommandType = CommandType.StoredProcedure;
+                con.Open();
+                SqlDataReader dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    Trabajador trb = new Trabajador
+                    {
+                        Trabajadorid = Convert.ToInt32(dr["ID"]),
+                        TrabajadorNum = dr["TrabajadorNum"].ToString().PadLeft(6, '0'),
+                        TrabajadorNomb = dr["TrabajadorNomb"].ToString(),
+                        TrabajadorTarif = dr["TrabajadorTarif"].ToString(),
+                        Oficio = dr["Oficio"].ToString(),
+                        TrabajadorSuper = dr["Supervisor"].ToString()
                     };
                     var trabajadorDTO = _mapper.Map<TrabajadorActualizarDTO>(trb);
                     listTrabajadores.Add(trabajadorDTO);
@@ -70,7 +102,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 while (dr.Read())
                 {
                     trb.Trabajadorid = Convert.ToInt32(dr["ID"]);
-                    trb.TrabajadorNum = dr["TrabajadorNum"].ToString();
+                    trb.TrabajadorNum = dr["TrabajadorNum"].ToString().PadLeft(6, '0');
                     trb.TrabajadorNomb = dr["TrabajadorNomb"].ToString();
                     trb.TrabajadorTarif = dr["TrabajadorTarif"].ToString();
                     trb.Oficio = dr["Oficio"].ToString();
@@ -104,6 +136,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 cmd.Parameters.AddWithValue("@Oficio", TRABAJADOR.Oficio);
 
                 con.Open();
+                //var test = cmd.ExecuteScalar();
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     res = true;
@@ -159,6 +192,8 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 cmd.Parameters.AddWithValue("@Oficio", trabajador.Oficio);
 
                 con.Open();
+                //var test = cmd.ExecuteScalar();
+
                 if (cmd.ExecuteNonQuery() > 0)
                 {
                     res = true;

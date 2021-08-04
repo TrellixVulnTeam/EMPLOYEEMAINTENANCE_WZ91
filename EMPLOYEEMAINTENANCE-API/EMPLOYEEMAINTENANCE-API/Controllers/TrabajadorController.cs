@@ -29,6 +29,16 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
 
         }
 
+        [HttpGet]
+        [Route("getclean")]
+        public IEnumerable<TrabajadorActualizarDTO> Getclean()
+        {
+
+
+            return _trabajadorCon.ListsClean();
+
+        }
+
         // GET api/<TrabajadorController>/5
         [HttpGet("{id}")]
         public ActionResult<TrabajadorActualizarDTO> GetId(int id)

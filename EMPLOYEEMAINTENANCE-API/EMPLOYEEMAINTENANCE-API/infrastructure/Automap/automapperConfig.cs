@@ -31,7 +31,7 @@ namespace EMPLOYEEMAINTENANCE_API.infrastructure.Automap
 
         private void AsignacionSinId()
         {
-            CreateMap<Asignaciones,AsignacionesaActualizarDTO>().ReverseMap()
+            CreateMap<Asignaciones,AsignacionesaAgregarDTO>().ReverseMap()
                 .ForMember(a=>a.Asignacionid,opt => opt.Ignore());
 
         }
