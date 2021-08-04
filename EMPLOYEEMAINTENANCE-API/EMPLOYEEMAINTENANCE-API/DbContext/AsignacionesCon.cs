@@ -21,7 +21,6 @@ namespace EMPLOYEEMAINTENANCE_API.Models
             _configuration = configuration;
             _mapper = mapper;
         }
-        //string ConnectionString = "Server=DTIC-16\\SQLSERVERX;Initial Catalog=EMPLOYEEMANAG;persist security info=True;Integrated Security=SSPI;";
 
         //Get list Asignaciones
         public IEnumerable<AsignacionesaActualizarDTO> Lists()
