@@ -16,7 +16,7 @@ namespace EMPLOYEEMAINTENANCE_API.DTO
         public string EdificioNum { get; set; }
 
         [Required]
-        [StringLength(10)]
+        [StringLength(40)]
         public string EdificioDireccion { get; set; }
 
 
