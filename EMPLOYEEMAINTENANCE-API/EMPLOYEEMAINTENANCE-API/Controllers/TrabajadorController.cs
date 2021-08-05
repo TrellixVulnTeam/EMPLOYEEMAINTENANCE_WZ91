@@ -78,7 +78,7 @@ namespace EMPLOYEEMAINTENANCE_API.Controllers
         {
             var res = false;
 
-            if (id != model.Trabajadorid)
+            if (id != model.TrabajadorNum)
             {
                 return BadRequest();
             }

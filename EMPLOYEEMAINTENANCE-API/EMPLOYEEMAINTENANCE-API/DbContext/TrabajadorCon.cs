@@ -37,7 +37,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 {
                     Trabajador trb = new Trabajador
                     {
-                        TrabajadorNum = dr["TrabajadorNum"].ToString(),
+                        TrabajadorNum = Convert.ToInt32(dr["TrabajadorNum"]),
                         TrabajadorNomb = dr["TrabajadorNomb"].ToString(),
                         TrabajadorTarif = dr["TrabajadorTarif"].ToString(),
                         Oficio = dr["Oficio"].ToString(),
@@ -69,8 +69,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 {
                     Trabajador trb = new Trabajador
                     {
-                        Trabajadorid = Convert.ToInt32(dr["ID"]),
-                        TrabajadorNum = dr["TrabajadorNum"].ToString().PadLeft(6, '0'),
+                        TrabajadorNum = Convert.ToInt32(dr["TrabajadorNum"]),
                         TrabajadorNomb = dr["TrabajadorNomb"].ToString(),
                         TrabajadorTarif = dr["TrabajadorTarif"].ToString(),
                         Oficio = dr["Oficio"].ToString(),
@@ -101,8 +100,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 SqlDataReader dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    trb.Trabajadorid = Convert.ToInt32(dr["ID"]);
-                    trb.TrabajadorNum = dr["TrabajadorNum"].ToString().PadLeft(6, '0');
+                    trb.TrabajadorNum = Convert.ToInt32(dr["TrabajadorNum"]);
                     trb.TrabajadorNomb = dr["TrabajadorNomb"].ToString();
                     trb.TrabajadorTarif = dr["TrabajadorTarif"].ToString();
                     trb.Oficio = dr["Oficio"].ToString();
@@ -130,7 +128,6 @@ namespace EMPLOYEEMAINTENANCE_API.Models
                 cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@TrabajadorNomb", TRABAJADOR.TrabajadorNomb);
-                cmd.Parameters.AddWithValue("@TrabajadorNum", TRABAJADOR.TrabajadorNum);
                 cmd.Parameters.AddWithValue("@TrabajadorSuper", TRABAJADOR.TrabajadorSuper);
                 cmd.Parameters.AddWithValue("@TrabajadorTarif", TRABAJADOR.TrabajadorTarif);
                 cmd.Parameters.AddWithValue("@Oficio", TRABAJADOR.Oficio);
@@ -177,14 +174,13 @@ namespace EMPLOYEEMAINTENANCE_API.Models
         {
             bool res = false;
             var trabajador = _mapper.Map<Trabajador>(model);
-            trabajador.Trabajadorid = id;
+            trabajador.TrabajadorNum = id;
             using (SqlConnection con = new SqlConnection(_configuration.GetConnectionString("prjectdn")))
 
             {
                 SqlCommand cmd = new SqlCommand("actualizarTrabajador", con);
                 cmd.CommandType = CommandType.StoredProcedure;
 
-                cmd.Parameters.AddWithValue("@id", trabajador.Trabajadorid);
                 cmd.Parameters.AddWithValue("@TrabajadorNomb", trabajador.TrabajadorNomb);
                 cmd.Parameters.AddWithValue("@TrabajadorNum", trabajador.TrabajadorNum);
                 cmd.Parameters.AddWithValue("@TrabajadorSuper", trabajador.TrabajadorSuper);

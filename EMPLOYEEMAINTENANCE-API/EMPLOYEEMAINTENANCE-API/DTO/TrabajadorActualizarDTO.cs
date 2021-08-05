@@ -8,12 +8,10 @@ namespace EMPLOYEEMAINTENANCE_API.DTO
 {
     public class TrabajadorActualizarDTO
     {
-        [Required]
-        public int Trabajadorid { get; set; }
+      
 
         [Required]
-        [StringLength(5)]
-        public string TrabajadorNum { get; set; }
+        public int TrabajadorNum { get; set; }
 
         [Required]
         [StringLength(15)]

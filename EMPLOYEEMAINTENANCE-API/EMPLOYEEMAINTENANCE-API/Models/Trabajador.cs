@@ -8,9 +8,7 @@ namespace EMPLOYEEMAINTENANCE_API.Models
     public class Trabajador
     {
 
-        public int Trabajadorid { get; set; }
-
-        public string TrabajadorNum { get; set; }
+        public int TrabajadorNum { get; set; }
 
         public string TrabajadorNomb { get; set; }
         public string TrabajadorTarif { get; set; }

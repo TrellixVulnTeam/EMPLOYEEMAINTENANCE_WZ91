@@ -54,7 +54,7 @@ namespace EMPLOYEEMAINTENANCE_API.infrastructure.Automap
         private void trabajadoresSinId()
         {
             CreateMap<Trabajador, TrabajadorAgregarDTO>().ReverseMap()
-                 .ForMember(a => a.Trabajadorid, opt => opt.Ignore());
+                 .ForMember(a => a.TrabajadorNum, opt => opt.Ignore());
 
         }
     }
